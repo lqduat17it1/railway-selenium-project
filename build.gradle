@@ -10,16 +10,22 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.jetbrains:annotations:20.1.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
-
-    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '2.41.0'
-
-    testImplementation group: 'org.testng', name: 'testng', version: '7.4.0'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.0.0-beta-4'
+    compile group: 'org.testng', name: 'testng', version: '7.3.0'
 
 
 }
 
 test {
     useJUnitPlatform()
+    useTestNG()
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }
