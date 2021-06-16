@@ -19,7 +19,7 @@ public class TimetablePage {
     public TicketPricePage checkPrice(String departStation, String arriveStation) {
         this.getBtnCheckPrice(departStation, arriveStation).click();
 
-        return new TicketPricePage();
+        return new TicketPricePage();   
     }
 
     public BookTicketPage bookTicket(String departStation, String arriveStation) {

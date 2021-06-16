@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
+import java.util.concurrent.TimeUnit;
+
 public class RegisterPage {
 
     // Locators
@@ -42,6 +44,12 @@ public class RegisterPage {
         this.getTxtConfirmPassword().sendKeys(confirmPassword);
         this.getTxtPid().sendKeys(pid);
         this.getBtnRegister().sendKeys(Keys.ENTER);
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return new AccountConfirmPage();
     }

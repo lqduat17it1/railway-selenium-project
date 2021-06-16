@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
+import java.util.concurrent.TimeUnit;
+
 public class BookTicketPage {
 
     // Locators
@@ -45,6 +47,12 @@ public class BookTicketPage {
     public SuccessPage bookTicket(String departDate, String departFrom, String arriveAt, String seatType, String ticketAmount) {
         this.getSelectDepartDate().selectByVisibleText(departDate);
         this.getSelectDepartFrom().selectByVisibleText(departFrom);
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
         this.getSelectArriveAt().selectByVisibleText(arriveAt);
         this.getSelectSeatType().selectByVisibleText(seatType);
         this.getSelectTicketAmount().selectByVisibleText(ticketAmount);

@@ -15,7 +15,8 @@ public class Test {
     @BeforeSuite
     public void beforeSuite() {
         System.out.println("Pre-condition");
-        Utilities.setBrowser("Chrome");
+        System.out.println(Constant.NEW_USERNAME);
+        Utilities.setBrowser("Firefox");
         Constant.WEBDRIVER.manage().window().maximize();
     }
 
@@ -46,6 +47,7 @@ public class Test {
         HomePage homePage = new HomePage();
 
         LoginPage loginPage = homePage.gotoLoginPage();
+        Constant.js.executeScript("window.scrollBy(0,2000)");
 
         String actualMsg = loginPage.login(Constant.NEW_USERNAME, Constant.NEW_PASSWORD).getWelcomeMessage();
         String expectedMsg = "Welcome " + Constant.NEW_USERNAME;
@@ -58,31 +60,36 @@ public class Test {
         System.out.println("TC03 - User can book ticket with valid info");
         HomePage homePage = new HomePage();
 
-        String departDate = "6/20/2021";
-        String departFrom = "Sài Gòn";
-        String arriveAt = "Đà Nẵng";
-        String seatType = "Soft bed";
-        String ticketAmount = "2";
-
         BookTicketPage bookTicketPage = homePage.gotoBookTicketPage();
-        bookTicketPage.bookTicket(departDate, departFrom, arriveAt, seatType, ticketAmount).checkTicket(departFrom, arriveAt, seatType, departDate, ticketAmount);
+        Constant.js.executeScript("window.scrollBy(0,2000)");
+        bookTicketPage.bookTicket(Constant.DEPART_DATE, Constant.DEPART_STATION, Constant.ARRIVE_STATION, Constant.SEAT_TYPE, Constant.AMOUNT).checkTicket(Constant.DEPART_STATION, Constant.ARRIVE_STATION, Constant.SEAT_TYPE, Constant.DEPART_DATE, Constant.AMOUNT);
 
         MyTicketPage myTicketPage = homePage.gotoMyTicketPage();
-        myTicketPage.checkTicket(departFrom, arriveAt, seatType, departDate, ticketAmount);
+        myTicketPage.checkTicketExists(Constant.DEPART_STATION, Constant.ARRIVE_STATION, Constant.SEAT_TYPE, Constant.DEPART_DATE, Constant.AMOUNT);
 
     }
 
     @org.testng.annotations.Test
     public void TC04() {
-        System.out.println("TC04 - User can navigate book ticket from train timetable");
+        System.out.println("TC04 - User can cancel ticket that they have booked");
         HomePage homePage = new HomePage();
 
-        String departStation = "Đà Nẵng";
-        String arriveStation = "Nha Trang";
+        MyTicketPage myTicketPage = new MyTicketPage();
+        Constant.js.executeScript("window.scrollBy(0,2000)");
+        myTicketPage.deleteTicket(Constant.DEPART_STATION, Constant.ARRIVE_STATION);
+
+        myTicketPage.checkTicketNotExists(Constant.DEPART_STATION, Constant.ARRIVE_STATION, Constant.SEAT_TYPE, Constant.DEPART_DATE, Constant.AMOUNT);
+
+    }
+
+    @org.testng.annotations.Test
+    public void TC05() {
+        System.out.println("TC05 - User can navigate book ticket from train timetable");
+        HomePage homePage = new HomePage();
 
         TimetablePage timetablePage = homePage.gotoTimetablePage();
         Constant.js.executeScript("window.scrollBy(0,2000)");
-        timetablePage.bookTicket(departStation, arriveStation).checkStation(departStation, arriveStation);
+        timetablePage.bookTicket(Constant.DEPART_STATION, Constant.ARRIVE_STATION).checkStation(Constant.DEPART_STATION, Constant.ARRIVE_STATION);
 
     }
 

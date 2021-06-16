@@ -2,9 +2,12 @@ package pageObjects;
 
 import common.Constant;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+
+import java.util.concurrent.TimeUnit;
 
 public class MyTicketPage {
 
@@ -57,9 +60,20 @@ public class MyTicketPage {
         this.getBtnApplyFilter().click();
     }
 
-    public void checkTicket(String departStation, String arriveStation, String seatType, String departDate, String amount) {
+    public void checkTicketExists(String departStation, String arriveStation, String seatType, String departDate, String amount) {
         boolean rs = this.getTicket(departStation, arriveStation, seatType, departDate, amount).isDisplayed();
         Assert.assertTrue(rs);
+    }
+
+    public void checkTicketNotExists(String departStation, String arriveStation, String seatType, String departDate, String amount) {
+        try {
+            TimeUnit.SECONDS.sleep(1);
+            boolean rs = this.getTicket(departStation, arriveStation, seatType, departDate, amount).isDisplayed();
+            Assert.assertFalse(rs);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void deleteTicket(String departStation, String arriveStation) {
