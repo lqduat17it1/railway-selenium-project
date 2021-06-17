@@ -5,7 +5,7 @@ import common.Constant;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class GeneralPage {
+public class BasePage {
 
     // Locators
     private final By tabLogin = By.xpath("//div[@id='menu']//a[@href='/Account/Login.cshtml']");
@@ -17,6 +17,8 @@ public class GeneralPage {
     private final By tabTicketPrice = By.xpath("//div[@id='menu']//span[text()='Ticket price']");
     private final By tabTimetable = By.xpath("//div[@id='menu']//span[text()='Timetable']");
     private final By tabContact = By.xpath("//div[@id='menu']//span[text()='Contact']");
+    private final By tabSelected = By.xpath("//li[@class='selected']//span");
+    private final By tabChangePassword = By.xpath("//div[@id='menu']//span[text()='Change password']");
 
     // Element
     protected WebElement getTabLogin() {
@@ -55,6 +57,10 @@ public class GeneralPage {
         return Constant.WEBDRIVER.findElement(tabContact);
     }
 
+    protected WebElement getTabChangePassword() {
+        return Constant.WEBDRIVER.findElement(tabChangePassword);
+    }
+
     // Methods
     public String getWelcomeMessage() {
         return this.getLblWelcomeMessage().getText();
@@ -62,21 +68,30 @@ public class GeneralPage {
 
     public LoginPage gotoLoginPage() {
         this.getTabLogin().click();
+        Constant.js.executeScript("window.scrollBy(0,2000)");
         return new LoginPage();
+    }
+
+    public HomePage gotoLogoutTab() {
+        this.getTabLogout().click();
+        return new HomePage();
     }
 
     public RegisterPage gotoRegisterPage() {
         this.getTabRegister().click();
+        Constant.js.executeScript("window.scrollBy(0,2000)");
         return new RegisterPage();
     }
 
     public BookTicketPage gotoBookTicketPage() {
         this.getTabBookTicket().click();
+        Constant.js.executeScript("window.scrollBy(0,2000)");
         return new BookTicketPage();
     }
 
     public MyTicketPage gotoMyTicketPage() {
         this.getTabMyTicket().click();
+        Constant.js.executeScript("window.scrollBy(0,2000)");
         return new MyTicketPage();
     }
 
@@ -87,6 +102,7 @@ public class GeneralPage {
 
     public TimetablePage gotoTimetablePage() {
         this.getTabTimetable().click();
+        Constant.js.executeScript("window.scrollBy(0,2000)");
         return new TimetablePage();
     }
 
@@ -95,4 +111,23 @@ public class GeneralPage {
         return new ContactPage();
     }
 
+    public ChangePasswordPage gotoChangePasswordPage() {
+        this.getTabChangePassword().click();
+        Constant.js.executeScript("window.scrollBy(0,2000)");
+        return new ChangePasswordPage();
+    }
+
+    public String getTabSelected() {
+        return Constant.WEBDRIVER.findElement(tabSelected).getText();
+    }
+
+    public boolean checkTabExists(String tabName) {
+        try {
+            String tab = Constant.WEBDRIVER.findElement(By.xpath("//div[@id='menu']//span[text()='"+ tabName +"']")).getText();
+            return tab.equals(tabName);
+        }
+        catch (Exception e) {
+            return false;
+        }
+    }
 }

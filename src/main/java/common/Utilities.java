@@ -14,7 +14,7 @@ public class Utilities {
             System.setProperty("webdriver.chrome.driver", "Executables/chromedriver.exe");
             ChromeOptions options = new ChromeOptions();
             options.addArguments("headless");
-            Constant.WEBDRIVER = new ChromeDriver(options);
+            Constant.WEBDRIVER = new ChromeDriver();
         }
             Constant.js = (JavascriptExecutor) Constant.WEBDRIVER;
 
@@ -22,7 +22,7 @@ public class Utilities {
             System.setProperty("webdriver.gecko.driver", "Executables/geckodriver.exe");
             FirefoxOptions options = new FirefoxOptions();
             options.setHeadless(true);
-            Constant.WEBDRIVER = new FirefoxDriver(options);
+            Constant.WEBDRIVER = new FirefoxDriver();
 
             Constant.js = (JavascriptExecutor) Constant.WEBDRIVER;
         }

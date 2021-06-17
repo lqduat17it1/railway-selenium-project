@@ -65,14 +65,15 @@ public class MyTicketPage {
         Assert.assertTrue(rs);
     }
 
-    public void checkTicketNotExists(String departStation, String arriveStation, String seatType, String departDate, String amount) {
+    public boolean checkTicketNotExists(String departStation, String arriveStation, String seatType, String departDate, String amount) {
         try {
             TimeUnit.SECONDS.sleep(1);
             boolean rs = this.getTicket(departStation, arriveStation, seatType, departDate, amount).isDisplayed();
-            Assert.assertFalse(rs);
+            return !rs;
         }
         catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
     }
 

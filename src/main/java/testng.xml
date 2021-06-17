@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite" verbose="1">
+    <test name="FirstTest">
+        <classes>
+            <class name="testcases.LoginTest" />
+            <class name="testcases.RegisterTest" />
+            <class name="testcases.ChangePasswordTest" />
+            <class name="testcases.ForgotPasswordTest" />
+            <class name="testcases.BookTicketTest" />
+            <class name="testcases.MyTicketTest" />
+        </classes>
+    </test>
+</suite>
