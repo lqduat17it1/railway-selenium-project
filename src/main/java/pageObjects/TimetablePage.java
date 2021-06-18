@@ -16,13 +16,13 @@ public class TimetablePage {
     }
 
     // Methods
-    public TicketPricePage checkPrice(String departStation, String arriveStation) {
+    public TicketPricePage clickCheckPrice(String departStation, String arriveStation) {
         this.getBtnCheckPrice(departStation, arriveStation).click();
 
         return new TicketPricePage();   
     }
 
-    public BookTicketPage bookTicket(String departStation, String arriveStation) {
+    public BookTicketPage clickBookTicket(String departStation, String arriveStation) {
         this.getBtnBookTicket(departStation, arriveStation).click();
 
         return new BookTicketPage();
