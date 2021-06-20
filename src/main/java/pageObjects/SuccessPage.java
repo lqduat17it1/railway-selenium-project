@@ -37,12 +37,7 @@ public class SuccessPage {
 
     // Methods
     public boolean checkTicket(String departStation, String arriveStation, String seatType, String departDate, String amount) {
-        Assert.assertEquals(this.getLblDepartStation().getText(), departStation);
-        Assert.assertEquals(this.getLblArriveStation().getText(), arriveStation);
-        Assert.assertEquals(this.getLblSeatType().getText(), seatType);
-        Assert.assertEquals(this.getLblDepartDate().getText(), departDate);
-        Assert.assertEquals(this.getLblAmount().getText(), amount);
-        return this.getLblDepartStation().getText().equals(departStation) && this.getLblArriveStation().getText().equals(arriveStation) && this.getLblSeatType().getText().equals(seatType) && this.getLblDepartDate().getText().equals(departDate) && this.getLblAmount().getText().equals(amount);
+        return getLblDepartStation().getText().equals(departStation) && getLblArriveStation().getText().equals(arriveStation) && getLblSeatType().getText().equals(seatType) && getLblDepartDate().getText().equals(departDate) && getLblAmount().getText().equals(amount);
 
     }
 

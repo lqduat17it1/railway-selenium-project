@@ -22,11 +22,11 @@ public class TicketPricePage {
     // Methods
     public void checkStation(String departStation, String arriveStation) {
         String str = "Ticket price from "+ departStation +" to "+ arriveStation;
-        Assert.assertEquals(this.getTxtStation().getText(), str);
+        Assert.assertEquals(getTxtStation().getText(), str);
     }
 
     public BookTicketPage bookTicket(String seatType) {
-        this.getBtnBookTicket(seatType).click();
+        getBtnBookTicket(seatType).click();
 
         return new BookTicketPage();
     }

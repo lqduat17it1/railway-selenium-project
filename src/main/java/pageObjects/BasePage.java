@@ -63,56 +63,56 @@ public class BasePage {
 
     // Methods
     public String getWelcomeMessage() {
-        return this.getLblWelcomeMessage().getText();
+        return getLblWelcomeMessage().getText();
     }
 
     public LoginPage gotoLoginPage() {
-        this.getTabLogin().click();
+        getTabLogin().click();
         Constant.js.executeScript("window.scrollBy(0,2000)");
         return new LoginPage();
     }
 
     public HomePage gotoLogoutTab() {
-        this.getTabLogout().click();
+        getTabLogout().click();
         return new HomePage();
     }
 
     public RegisterPage gotoRegisterPage() {
-        this.getTabRegister().click();
+        getTabRegister().click();
         Constant.js.executeScript("window.scrollBy(0,2000)");
         return new RegisterPage();
     }
 
     public BookTicketPage gotoBookTicketPage() {
-        this.getTabBookTicket().click();
+        getTabBookTicket().click();
         Constant.js.executeScript("window.scrollBy(0,2000)");
         return new BookTicketPage();
     }
 
     public MyTicketPage gotoMyTicketPage() {
-        this.getTabMyTicket().click();
+        getTabMyTicket().click();
         Constant.js.executeScript("window.scrollBy(0,2000)");
         return new MyTicketPage();
     }
 
     public TrainPriceListPage gotoTicketPricePage() {
-        this.getTabTicketPrice().click();
+        getTabTicketPrice().click();
         return new TrainPriceListPage();
     }
 
     public TimetablePage gotoTimetablePage() {
-        this.getTabTimetable().click();
+        getTabTimetable().click();
         Constant.js.executeScript("window.scrollBy(0,2000)");
         return new TimetablePage();
     }
 
     public ContactPage gotoContactPage() {
-        this.getTabContact().click();
+        getTabContact().click();
         return new ContactPage();
     }
 
     public ChangePasswordPage gotoChangePasswordPage() {
-        this.getTabChangePassword().click();
+        getTabChangePassword().click();
         Constant.js.executeScript("window.scrollBy(0,2000)");
         return new ChangePasswordPage();
     }

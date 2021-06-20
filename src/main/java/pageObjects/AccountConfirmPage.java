@@ -26,12 +26,12 @@ public class AccountConfirmPage {
 
     // Methods
     public String getMessage() {
-        return this.getLblMessage().getText();
+        return getLblMessage().getText();
     }
 
     public String confirmation(String code) {
-        this.getTxtConfirmationCode().sendKeys(code);
-        this.getBtnConfirm().click();
+        getTxtConfirmationCode().sendKeys(code);
+        getBtnConfirm().click();
 
         return getMessage();
     }

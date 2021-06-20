@@ -16,6 +16,6 @@ public class ContactPage {
 
     // Methods
     public void sendMail() {
-        this.getLblEmail().click();
+        getLblEmail().click();
     }
 }

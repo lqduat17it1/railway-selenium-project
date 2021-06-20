@@ -54,11 +54,11 @@ public class RegisterPage {
 
     // Methods
     public AccountConfirmPage register(String email, String password, String confirmPassword,  String pid) {
-        this.getTxtEmail().sendKeys(email);
-        this.getTxtPassword().sendKeys(password);
-        this.getTxtConfirmPassword().sendKeys(confirmPassword);
-        this.getTxtPid().sendKeys(pid);
-        this.getBtnRegister().sendKeys(Keys.ENTER);
+        getTxtEmail().sendKeys(email);
+        getTxtPassword().sendKeys(password);
+        getTxtConfirmPassword().sendKeys(confirmPassword);
+        getTxtPid().sendKeys(pid);
+        getBtnRegister().sendKeys(Keys.ENTER);
         try {
             TimeUnit.SECONDS.sleep(2);
         }
@@ -70,14 +70,14 @@ public class RegisterPage {
     }
 
     public String getMessage() {
-        return this.getLblErrorMsg().getText();
+        return getLblErrorMsg().getText();
     }
 
     public String getPasswordMsg() {
-        return this.getLblErrorPasswordMsg().getText();
+        return getLblErrorPasswordMsg().getText();
     }
 
     public String getPIDMsg() {
-        return this.getLblErrorPIDMsg().getText();
+        return getLblErrorPIDMsg().getText();
     }
 }

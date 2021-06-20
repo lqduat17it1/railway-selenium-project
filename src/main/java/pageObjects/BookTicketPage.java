@@ -45,25 +45,25 @@ public class BookTicketPage {
 
     // Methods
     public SuccessPage bookTicket(String departDate, String departFrom, String arriveAt, String seatType, String ticketAmount) {
-        this.getSelectDepartDate().selectByVisibleText(departDate);
-        this.getSelectDepartFrom().selectByVisibleText(departFrom);
+        getSelectDepartDate().selectByVisibleText(departDate);
+        getSelectDepartFrom().selectByVisibleText(departFrom);
         try {
             TimeUnit.SECONDS.sleep(1);
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-        this.getSelectArriveAt().selectByVisibleText(arriveAt);
-        this.getSelectSeatType().selectByVisibleText(seatType);
-        this.getSelectTicketAmount().selectByVisibleText(ticketAmount);
-        this.getBtnBookTicket().click();
+        getSelectArriveAt().selectByVisibleText(arriveAt);
+        getSelectSeatType().selectByVisibleText(seatType);
+        getSelectTicketAmount().selectByVisibleText(ticketAmount);
+        getBtnBookTicket().click();
 
         return new SuccessPage();
     }
 
     public void checkStation(String departFrom, String arriveAt) {
-        Assert.assertEquals(this.getSelectDepartFrom().getFirstSelectedOption().getText(), departFrom);
-        Assert.assertEquals(this.getSelectArriveAt().getFirstSelectedOption().getText(), arriveAt);
+        Assert.assertEquals(getSelectDepartFrom().getFirstSelectedOption().getText(), departFrom);
+        Assert.assertEquals(getSelectArriveAt().getFirstSelectedOption().getText(), arriveAt);
     }
 
 }

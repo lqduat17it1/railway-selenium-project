@@ -49,26 +49,26 @@ public class MyTicketPage {
 
     // Methods
     public void filters() {
-        this.getBtnApplyFilter().click();
+        getBtnApplyFilter().click();
     }
 
     public void filters(String departStation, String arriveStation, String departDate, String status) {
-        this.getSelectDepartStation().selectByVisibleText(departStation);
-        this.getSelectArriveStation().selectByVisibleText(arriveStation);
-        this.getTxtDepartDate().sendKeys(departDate);
-        this.getSelectStatus().selectByVisibleText(status);
-        this.getBtnApplyFilter().click();
+        getSelectDepartStation().selectByVisibleText(departStation);
+        getSelectArriveStation().selectByVisibleText(arriveStation);
+        getTxtDepartDate().sendKeys(departDate);
+        getSelectStatus().selectByVisibleText(status);
+        getBtnApplyFilter().click();
     }
 
     public void checkTicketExists(String departStation, String arriveStation, String seatType, String departDate, String amount) {
-        boolean rs = this.getTicket(departStation, arriveStation, seatType, departDate, amount).isDisplayed();
+        boolean rs = getTicket(departStation, arriveStation, seatType, departDate, amount).isDisplayed();
         Assert.assertTrue(rs);
     }
 
     public boolean checkTicketNotExists(String departStation, String arriveStation, String seatType, String departDate, String amount) {
         try {
             TimeUnit.SECONDS.sleep(1);
-            boolean rs = this.getTicket(departStation, arriveStation, seatType, departDate, amount).isDisplayed();
+            boolean rs = getTicket(departStation, arriveStation, seatType, departDate, amount).isDisplayed();
             return !rs;
         }
         catch (Exception e) {
@@ -78,7 +78,7 @@ public class MyTicketPage {
     }
 
     public void deleteTicket(String departStation, String arriveStation) {
-        this.getBtnOperation(departStation, arriveStation).click();
+        getBtnOperation(departStation, arriveStation).click();
         Constant.WEBDRIVER.switchTo().alert().accept();
     }
 

@@ -36,12 +36,12 @@ public class ChangePasswordPage {
 
     // Methods
     public String changePassword(String currentPassword, String newPassword) {
-        this.getTxtCurrentPassword().sendKeys(currentPassword);
-        this.getTxtNewPassword().sendKeys(newPassword);
-        this.getTxtConfirmPassword().sendKeys(newPassword);
-        this.getBtnChangePassword().click();
+        getTxtCurrentPassword().sendKeys(currentPassword);
+        getTxtNewPassword().sendKeys(newPassword);
+        getTxtConfirmPassword().sendKeys(newPassword);
+        getBtnChangePassword().click();
 
-        return this.getLblErrorMsg().getText();
+        return getLblErrorMsg().getText();
     }
 
 }

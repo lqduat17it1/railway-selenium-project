@@ -15,8 +15,7 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
     implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.0.0-beta-4'
     compile group: 'org.testng', name: 'testng', version: '7.3.0'
-    implementation group: 'com.relevantcodes', name: 'extentreports', version: '2.41.2'
-
+    implementation group: 'com.aventstack', name: 'extentreports', version: '5.0.8'
 }
 
 test {

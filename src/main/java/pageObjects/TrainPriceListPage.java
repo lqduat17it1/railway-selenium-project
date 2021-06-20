@@ -13,7 +13,7 @@ public class TrainPriceListPage {
 
     // Methods
     public TicketPricePage checkPrice(String departStation, String arriveStation) {
-        this.getBtnCheckPrice(departStation, arriveStation).click();
+        getBtnCheckPrice(departStation, arriveStation).click();
 
         return new TicketPricePage();
     }

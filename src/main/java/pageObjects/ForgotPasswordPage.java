@@ -26,10 +26,10 @@ public class ForgotPasswordPage {
 
     // Methods
     public String passwordReset(String email) {
-        this.getTxtEmailAddress().sendKeys(email);
-        this.getBtnSend().click();
+        getTxtEmailAddress().sendKeys(email);
+        getBtnSend().click();
 
-        return this.getLblMsgError().getText();
+        return getLblMsgError().getText();
     }
 
 }
