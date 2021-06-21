@@ -8,38 +8,37 @@ import pageObjects.LoginPage;
 
 public class TC14 extends BaseTest {
 
-    @Test(description = "TC14 - User can book 1 ticket at a time")
-    public void TC14() {
+    @Test(description = "TC14 - User can book 1 ticket at a time", testName = "Book Ticket")
+    public void tc14() {
         homePage.open();
-        test.info("Navigate to QA Railway Website");
-
-        LoginPage loginPage = homePage.gotoLoginPage();
-        test.info("Click on \"Login\" tab");
-
-        loginPage.login(Constant.USERNAME, Constant.PASSWORD);
-        test.info("Login to Railway website");
-        test.info(" - Enter Username: "+Constant.USERNAME);
-        test.info(" - Enter Password: "+Constant.PASSWORD);
-
-        BookTicketPage bookTicketPage = homePage.gotoBookTicketPage();
-        test.info("Click on \"Book ticket\" tab");
+        step(1, "Navigate to QA Railway Website");
 
         try {
+            LoginPage loginPage = homePage.gotoLoginPage();
+            loginPage.login(Constant.USERNAME, Constant.PASSWORD);
+            step(2, "Login with a valid account ");
+            node = test.createNode("Login info details (Step 2)");
+            node.info("Username: " + Constant.USERNAME);
+            node.info("Password: " + Constant.PASSWORD);
+
+            BookTicketPage bookTicketPage = homePage.gotoBookTicketPage();
+            step(3, "Click on \"Book ticket\" tab");
+
+
             boolean result = bookTicketPage.bookTicket(DataTestSet1.DEPART_DATE, DataTestSet1.DEPART_STATION, DataTestSet1.ARRIVE_STATION, DataTestSet1.SEAT_TYPE, DataTestSet1.AMOUNT).checkTicket(DataTestSet1.DEPART_STATION, DataTestSet1.ARRIVE_STATION, DataTestSet1.SEAT_TYPE, DataTestSet1.DEPART_DATE, DataTestSet1.AMOUNT);
-            test.info("Book ticket");
-            test.info(" - Select depart date: "+ DataTestSet1.DEPART_DATE);
-            test.info(" - Select depart from: "+ DataTestSet1.DEPART_STATION);
-            test.info(" - Select arrive at: "+ DataTestSet1.ARRIVE_STATION);
-            test.info(" - Select seat type: "+ DataTestSet1.SEAT_TYPE);
-            test.info(" - Select ticket amount: "+ DataTestSet1.AMOUNT);
+            step(4, "Select depart date: " + DataTestSet1.DEPART_DATE);
+            step(5, "Select depart from: " + DataTestSet1.DEPART_STATION + " and " + DataTestSet1.ARRIVE_STATION + "for Arrive at");
+            step(6, "Select seat type: "+ DataTestSet1.SEAT_TYPE);
+            step(7, "Select ticket amount: "+ DataTestSet1.AMOUNT);
+            step(8, "Click on \"Book ticket\" button");
 
             if (result) {
-                test.pass("User book ticket successfully");
+                pass("User book ticket successfully");
             } else
-                test.fail("Ticket information is not correctly");
+                fail("Ticket information is not correctly");
         }
         catch (Exception e) {
-            e.printStackTrace();
+            test.fail(e);
         }
 
     }

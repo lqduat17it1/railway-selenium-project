@@ -6,44 +6,49 @@ import pageObjects.LoginPage;
 
 public class TC06 extends BaseTest {
 
-    @Test(description = "TC06 - Additional pages display once user logged in")
-    public void TC06() {
+    @Test(description = "TC06 - Additional pages display once user logged in", testName = "Login")
+    public void tc06() {
         homePage.open();
-        test.info("Navigate to QA Railway Website");
+        step(1, "Navigate to QA Railway Website");
 
-        LoginPage loginPage = homePage.gotoLoginPage();
-        test.info("Click on \"Login\" tab");
+        try {
+            LoginPage loginPage = homePage.gotoLoginPage();
+            step(2, "Click on \"Login\" tab");
 
-        loginPage.login(Constant.USERNAME, Constant.PASSWORD);
-        test.info("Login to Railway website");
-        test.info(" - Enter Username: "+Constant.USERNAME);
-        test.info(" - Enter Password: "+Constant.PASSWORD);
+            loginPage.login(Constant.USERNAME, Constant.PASSWORD);
+            step(3, "Login with valid account");
+            node = test.createNode("Login info details (Step 3)");
+            node.info("Username: " + Constant.USERNAME);
+            node.info("Password: " + Constant.PASSWORD);
 
-        String[] tab = {"My ticket", "Change password", "Log out"};
-        for (String s : tab) {
-            if (!homePage.checkTabExists(s)) {
-                test.fail(s + " is not displayed in menu bar");
+            String[] tab = {"My ticket", "Change password", "Log out"};
+            for (String s : tab) {
+                if (!homePage.checkTabExists(s)) {
+                    fail(s + " is not displayed in menu bar");
+                } else {
+                    pass(s + " is displayed in menu bar");
+                }
+            }
+
+            homePage.gotoMyTicketPage();
+            step(4, "Click on \"My ticket\" tab");
+            if (homePage.getTabSelected().equals("My ticket")) {
+                pass("User can navigate to My ticket page");
             } else {
-                test.pass(s + " is displayed in menu bar");
+                fail("My ticket page is not displayed");
+            }
+
+            homePage.gotoChangePasswordPage();
+            step(5, "Click on \"Change password\" tab");
+            if (homePage.getTabSelected().equals("Change password")) {
+                pass("User can navigate to Change password page");
+            } else {
+                fail("Change password page is not displayed");
             }
         }
-
-        homePage.gotoMyTicketPage();
-        if (homePage.getTabSelected().equals("My ticket")) {
-            test.pass("User can navigate to My ticket page");
+        catch (Exception e) {
+            test.fail(e);
         }
-        else {
-            test.fail("My ticket page is not displayed");
-        }
-
-        homePage.gotoChangePasswordPage();
-        if (homePage.getTabSelected().equals("Change password")) {
-            test.pass("User can navigate to Change password page");
-        }
-        else {
-            test.fail("Change password page is not displayed");
-        }
-
     }
 
 }

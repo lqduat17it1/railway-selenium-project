@@ -53,6 +53,7 @@ public class BaseTest {
         Test t = method.getAnnotation(Test.class);
         test = report.createTest(t.description());
         test.assignDevice(browser);
+        test.assignCategory(t.testName());
     }
 
     @AfterMethod
@@ -73,17 +74,6 @@ public class BaseTest {
         }
     }
 
-    public void setCheckNode(String nodeName, String actualMsg, String expectedMsg, String type) {
-        if (type.equals("pass")) {
-            String name = "<b><font color=green>" + nodeName + "</font></b>";
-            node = test.createNode(name).pass("Actual message: " + actualMsg).info("Expected message: " + expectedMsg);
-        }
-        else {
-            String name = "<b><font color=red>" + nodeName + "</font></b>";
-            node = test.createNode(name).fail("Actual message: " + actualMsg).info("Expected message: " + expectedMsg);
-        }
-    }
-
     public ExtentTest pass(String msg) {
         return test.pass("<b><font color=green>" + msg + "</font></b>");
     }
@@ -92,8 +82,30 @@ public class BaseTest {
         return test.fail("<b><font color=red>" + msg + "</font></b>", MediaEntityBuilder.createScreenCaptureFromPath(Utilities.takeScreenshot(this.getClass().getSimpleName())).build());
     }
 
+    public ExtentTest skip(String msg) {
+        return test.skip("<b><font color=gray>" + msg + "</font></b>");
+    }
+
     public ExtentTest step(int step, String msg) {
         return test.info("<b>Step " + step + ":&emsp;</b>" + msg);
+    }
+
+    public void checkMsgNodePass(String nodeName, String actualMsg, String expectedMsg) {
+        String name = passFormat(nodeName);
+        node = test.createNode(name).pass("Actual message: " + actualMsg).info("Expected message: " + expectedMsg);
+    }
+
+    public void checkMsgNodeFail(String nodeName, String actualMsg, String expectedMsg) {
+        String name = failFormat(nodeName);
+        node = test.createNode(name).fail("Actual message: " + actualMsg).info("Expected message: " + expectedMsg);
+    }
+
+    public String passFormat(String str) {
+        return "<b><font color=green>" + str + "</font></b>";
+    }
+
+    public String failFormat(String str) {
+        return "<b><font color=red>" + str + "</font></b>";
     }
 
 }

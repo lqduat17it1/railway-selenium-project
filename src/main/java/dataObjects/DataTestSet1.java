@@ -11,7 +11,7 @@ public class DataTestSet1 {
 
     public static Random rd = new Random();
 
-    public static final String NEW_USERNAME = "lqduat".concat(String.valueOf(rd.nextInt(100000))).concat("@logigear.com");
+    public static final String NEW_USERNAME = "lqduat".concat(String.valueOf(rd.nextInt(1000000))).concat("@logigear.com");
     public static final String NEW_PASSWORD = "123456789";
     public static final String NEW_PID = "123456789";
 

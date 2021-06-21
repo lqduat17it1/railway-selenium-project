@@ -1,38 +1,43 @@
 package testcases;
 
 import common.Constant;
+import common.Utilities;
 import org.testng.annotations.Test;
 import pageObjects.LoginPage;
 
 public class TC05 extends BaseTest {
 
-    @Test(description = "TC05 - System shows message when user enters wrong password several times")
-    public void TC05() {
+    @Test(description = "TC05 - System shows message when user enters wrong password several times", testName = "Login")
+    public void tc05() {
         homePage.open();
-        test.info("Navigate to QA Railway Website");
+        step(1, "Navigate to QA Railway Website");
 
-        LoginPage loginPage = homePage.gotoLoginPage();
-        test.info("Click on \"Login\" tab");
+        try {
+            LoginPage loginPage = homePage.gotoLoginPage();
+            step(2, "Click on \"Login\" tab");
 
-        test.info("Login with invalid info for 4 times");
-        for (int i=1; i<=4; i++) {
-            Constant.js.executeScript("window.scrollBy(0,2000)");
-            loginPage.login(Constant.USERNAME, "12345678910");
-            test.info(i+". Login with username \""+ Constant.USERNAME +"\" and password \"12345678910\" ");
+            step(3, "Login with invalid info for 4 times");
+            node = test.createNode(passFormat("Login info details (Step 3)"));
+            for (int i = 1; i <= 4; i++) {
+                Utilities.scrollDown();
+                loginPage.login(Constant.USERNAME, "12345678910");
+                node.info(i + ". Login with username \"" + Constant.USERNAME + "\" and password \"12345678910\" ");
+            }
+
+            String actualMsg = loginPage.getLblLoginMsg().getText();
+            String expectedMsg = "You have used 4 out of 5 login attempts. After all 5 have been used, you will be unable to login for 15 minutes.";
+
+            if (actualMsg.equals(expectedMsg)) {
+                pass("User can't login and message \"" + expectedMsg + "\" appears.");
+                checkMsgNodePass("Check message", actualMsg, expectedMsg);
+            } else {
+                fail("An error message is displays wrong content");
+                checkMsgNodeFail("Check message", actualMsg, expectedMsg);
+            }
         }
-        String actualMsg = loginPage.getLblLoginMsg().getText();
-        test.info("Actual message: "+ actualMsg);
-
-        String expectedMsg = "You have used 4 out of 5 login attempts. After all 5 have been used, you will be unable to login for 15 minutes.";
-        test.info("Expected message: "+ expectedMsg);
-
-        if (actualMsg.equals(expectedMsg)) {
-            test.pass("User can't login and message \""+ expectedMsg +"\" appears.");
+        catch (Exception e) {
+            test.fail(e);
         }
-        else {
-            test.fail("An error message is displays wrong content");
-        }
-
     }
 
 }

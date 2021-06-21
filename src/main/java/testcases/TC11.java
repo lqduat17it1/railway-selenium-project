@@ -6,72 +6,75 @@ import pageObjects.RegisterPage;
 
 public class TC11 extends BaseTest {
 
-    @Test(description = "TC11 - User can't create account while password and PID fields are empty")
-    public void TC11() {
+    @Test(description = "TC11 - User can't create account while password and PID fields are empty", testName = "Register")
+    public void tc11() {
         homePage.open();
-        test.info("Navigate to QA Railway Website");
+        step(1, "Navigate to QA Railway Website");
 
         RegisterPage registerPage = homePage.gotoRegisterPage();
-        test.info("Click on \"Register\" tab");
+        step(2, "Click on \"Register\" tab");
 
         try {
-            String successMsg = registerPage.register(DataTestSet1.NEW_USERNAME, "", "", "").getMessage();
-            test.info("Register account with only enter username");
+            String successMsg = registerPage.register("99" + DataTestSet1.NEW_USERNAME, "", "", "").getMessage();
+            step(3, "Enter valid email address and leave other fields empty");
+            node = test.createNode("Register info details (Step 3)");
+            node.info("Username: " + "99" + DataTestSet1.NEW_USERNAME);
+            node.info("Password: ");
+            node.info("Confirm password: ");
+            node.info("PID: ");
+            step(4, "Click on \"Register\" button");
 
             String actualErrorMsg = registerPage.getMessage();
-            test.info("Actual error message: "+ actualErrorMsg);
-
             String expectedErrorMsg = "There're errors in the form. Please correct the errors and try again.";
-            test.info("Expected error message: "+ expectedErrorMsg);
 
             if (actualErrorMsg.equals(expectedErrorMsg)) {
-                test.pass("Message \""+ expectedErrorMsg +"\" appears above the form.");
+                pass("Message \""+ expectedErrorMsg +"\" appears above the form.");
+                checkMsgNodePass("Check error message", actualErrorMsg, expectedErrorMsg);
             }
             else {
                 if (successMsg.equals("You're here")) {
-                    test.pass("User can register account with password and pid are empty");
+                    fail("User can register account with password and pid are empty");
                 }
                 else {
-                    test.fail("Message displays is wrong with design content");
+                    fail("Message displays is wrong with design content");
                 }
+                checkMsgNodeFail("Check error message", actualErrorMsg, expectedErrorMsg);
             }
 
             boolean errorPasswordMsg = registerPage.getLblErrorPasswordMsg().isDisplayed();
             String actualErrorPasswordMsg = registerPage.getPasswordMsg();
-            test.info("Actual error password message: "+ actualErrorPasswordMsg);
-
             String expectedErrorPasswordMsg = "Invalid password length";
-            test.info("Expected error password message: "+ expectedErrorPasswordMsg);
 
             if (actualErrorPasswordMsg.equals(expectedErrorPasswordMsg) && errorPasswordMsg) {
-                test.pass("Error message \""+ expectedErrorPasswordMsg +"\" displays");
+                pass("Error message \""+ expectedErrorPasswordMsg +"\" displays");
+                checkMsgNodePass("Check error password message", actualErrorPasswordMsg, expectedErrorPasswordMsg);
             }
             else {
                 if (!errorPasswordMsg)
-                    test.fail("Error password message is not displayed");
+                    fail("Error password message is not displayed");
                 else
-                    test.fail("Message displays is wrong with design content");
+                    fail("Message displays is wrong with design content");
+                checkMsgNodeFail("Check error password message", actualErrorPasswordMsg, expectedErrorPasswordMsg);
             }
 
             boolean errorPIDMsg = registerPage.getLblErrorPIDMsg().isDisplayed();
             String actualErrorPIDMsg = registerPage.getPIDMsg();
-            test.info("Actual error pid message: "+ actualErrorPIDMsg);
-
             String expectedErrorPIDMsg = "Invalid ID length";
-            test.info("Expected error pid message: "+ expectedErrorPIDMsg);
 
             if (actualErrorPIDMsg.equals(expectedErrorPIDMsg) && errorPIDMsg) {
-                test.pass("Error message \""+ expectedErrorPIDMsg +"\" displays");
+                pass("Error message \""+ expectedErrorPIDMsg +"\" displays");
+                checkMsgNodePass("Check error PID message", actualErrorPIDMsg, expectedErrorPIDMsg);
             }
             else {
                 if (!errorPIDMsg)
-                    test.fail("Error pid message is not displayed");
+                    fail("Error pid message is not displayed");
                 else
-                    test.fail("Message displays is wrong with design content");
+                    fail("Message displays is wrong with design content");
+                checkMsgNodeFail("Check error PID message", actualErrorPIDMsg, expectedErrorPIDMsg);
             }
         }
         catch (Exception e) {
-            e.printStackTrace();
+            test.fail(e);
         }
     }
 

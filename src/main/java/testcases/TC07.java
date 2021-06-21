@@ -6,32 +6,36 @@ import pageObjects.RegisterPage;
 
 public class TC07 extends BaseTest {
 
-    @Test(description = "TC07 - User can create new account")
-    public void TC07() {
+    @Test(description = "TC07 - User can create new account", testName = "Register")
+    public void tc07() {
         homePage.open();
-        test.info("Navigate to QA Railway Website");
+        step(1, "Navigate to QA Railway Website");
 
-        RegisterPage registerPage = homePage.gotoRegisterPage();
-        test.info("Click on \"Register\" tab");
+        try {
+            RegisterPage registerPage = homePage.gotoRegisterPage();
+            step(2, "Click on \"Register\" tab");
 
-        String actualMsg = registerPage.register(DataTestSet1.NEW_USERNAME, DataTestSet1.NEW_PASSWORD, DataTestSet1.NEW_PASSWORD, DataTestSet1.NEW_PID).getMessage();
-        test.info("Register account");
-        test.info(" - Enter username: "+ DataTestSet1.NEW_USERNAME);
-        test.info(" - Enter password: "+ DataTestSet1.NEW_PASSWORD);
-        test.info(" - Enter confirm password: "+ DataTestSet1.NEW_PASSWORD);
-        test.info(" - Enter PID: "+ DataTestSet1.NEW_PID);
-        test.info("Actual message: "+ actualMsg);
+            String actualMsg = registerPage.register(DataTestSet1.NEW_USERNAME, DataTestSet1.NEW_PASSWORD, DataTestSet1.NEW_PASSWORD, DataTestSet1.NEW_PID).getMessage();
+            step(3, "Enter valid information into all fields");
+            node = test.createNode("Register info details (Step 3)");
+            node.info("Username: " + DataTestSet1.NEW_USERNAME);
+            node.info("Password: " + DataTestSet1.NEW_PASSWORD);
+            node.info("Confirm password: " + DataTestSet1.NEW_PASSWORD);
+            node.info("PID: " + DataTestSet1.NEW_PID);
 
-        String expectedMsg = "Thank you for registering your account";
-        test.info("Expected message: "+ expectedMsg);
+            String expectedMsg = "Thank you for registering your account";
 
-        if (actualMsg.equals(expectedMsg)) {
-            test.pass("A message \""+ expectedMsg +"\" appears.");
+            if (actualMsg.equals(expectedMsg)) {
+                pass("A message \"" + expectedMsg + "\" appears.");
+                checkMsgNodePass("Check message", actualMsg, expectedMsg);
+            } else {
+                fail("A message displayed is not same expected message");
+                checkMsgNodeFail("Check message", actualMsg, expectedMsg);
+            }
         }
-        else {
-            test.fail("A message displayed is not same expected message");
+        catch (Exception e) {
+            test.fail(e);
         }
-
     }
 
 }

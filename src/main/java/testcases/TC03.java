@@ -6,38 +6,40 @@ import pageObjects.LoginPage;
 
 public class TC03 extends BaseTest {
 
-    @Test(description = "TC03 - User cannot log into Railway with invalid password")
+    @Test(description = "TC03 - User cannot log into Railway with invalid password", testName = "Login")
     public void tc03() {
         homePage.open();
         step(1, "Navigate to QA Railway Website");
 
-        LoginPage loginPage = homePage.gotoLoginPage();
-        step(2, "Click on \"Login\" tab");
+        try {
+            LoginPage loginPage = homePage.gotoLoginPage();
+            step(2, "Click on \"Login\" tab");
 
-        loginPage.login(Constant.USERNAME, "");
-        step(3, "Enter valid Email and invalid Password");
-        node = test.createNode("Login info detail (Step 3)");
-        node.info("Username: " + Constant.USERNAME);
-        node.info("Password: ");
+            loginPage.login(Constant.USERNAME, "");
+            step(3, "Enter valid Email and invalid Password");
+            node = test.createNode("Login info details (Step 3)");
+            node.info("Username: " + Constant.USERNAME);
+            node.info("Password: ");
 
-        String actualMsg = loginPage.getLblLoginMsg().getText();
-        String expectedMsg = "There was a problem with your login and/or errors exist in your form.";
+            String actualMsg = loginPage.getLblLoginMsg().getText();
+            String expectedMsg = "There was a problem with your login and/or errors exist in your form.";
 
-        if (actualMsg.equals(expectedMsg)) {
-            pass("User can't login and message \""+ expectedMsg +"\" appears.");
-            setCheckNode("Check error message", actualMsg, expectedMsg, "pass");
-        }
-        else {
-            actualMsg = homePage.getWelcomeMessage();
-            if (!actualMsg.equals("Welcome guest!")) {
-                fail("Login successfully with invalid password");
+            if (actualMsg.equals(expectedMsg)) {
+                pass("User can't login and message \"" + expectedMsg + "\" appears.");
+                checkMsgNodePass("Check error message", actualMsg, expectedMsg);
+            } else {
+                actualMsg = homePage.getWelcomeMessage();
+                if (!actualMsg.equals("Welcome guest!")) {
+                    fail("Login successfully with invalid password");
+                } else {
+                    fail("An error message is wrong");
+                }
+                checkMsgNodeFail("Check error message", actualMsg, expectedMsg);
             }
-            else {
-                fail("An error message is wrong");
-            }
-            setCheckNode("Check error message", actualMsg, expectedMsg, "fail");
         }
-
+        catch (Exception e) {
+            test.fail(e);
+        }
     }
 
 }
