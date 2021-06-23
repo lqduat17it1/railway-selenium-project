@@ -11,7 +11,7 @@ public class ContactPage {
 
     // Elements
     public WebElement getLblEmail() {
-        return Constant.WEBDRIVER.findElement(lblEmail);
+        return Constant.webdriver.get().findElement(lblEmail);
     }
 
     // Methods

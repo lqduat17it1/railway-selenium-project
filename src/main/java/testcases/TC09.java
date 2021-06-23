@@ -16,20 +16,20 @@ public class TC09 extends BaseTest {
             LoginPage loginPage = homePage.gotoLoginPage();
             step(2, "Click on \"Login\" tab");
 
-            loginPage.login(DataTestSet1.NEW_USERNAME, DataTestSet1.NEW_PASSWORD);
+            loginPage.login(DataTestSet1.USERNAME_TC09, DataTestSet1.PASSWORD_TC09);
             step(3, "Login with valid account");
             node = test.createNode("Login info details (Step 3)");
-            node.info("Username: " + DataTestSet1.NEW_USERNAME);
-            node.info("Password: " + DataTestSet1.NEW_PASSWORD);
+            node.info("Username: " + DataTestSet1.USERNAME_TC09);
+            node.info("Password: " + DataTestSet1.PASSWORD_TC09);
 
             ChangePasswordPage changePasswordPage = homePage.gotoChangePasswordPage();
             step(4, "Click on \"Change password\" tab");
 
-            String actualMsg = changePasswordPage.changePassword(DataTestSet1.NEW_PASSWORD, DataTestSet1.NEW_PASSWORD + "1");
+            String actualMsg = changePasswordPage.changePassword(DataTestSet1.PASSWORD_TC09, DataTestSet1.PASSWORD_TC09);
             step(5, "Enter valid value into all fields");
             node = test.createNode("Change password info details (Step 5)");
-            node.info("Current password: " + DataTestSet1.NEW_PASSWORD);
-            node.info("New password: " + DataTestSet1.NEW_PASSWORD + "1");
+            node.info("Current password: " + DataTestSet1.PASSWORD_TC09);
+            node.info("New password: " + DataTestSet1.PASSWORD_TC09);
             step(6, "Click on \"Change Password\" button");
 
             String expectedMsg = "Your password has been updated!";

@@ -3,10 +3,12 @@ package pageObjects;
 import common.Constant;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 public class BookTicketPage {
 
@@ -17,42 +19,47 @@ public class BookTicketPage {
     private final By selectSeatType = By.name("SeatType");
     private final By selectTicketAmount = By.name("TicketAmount");
     private final By btnBookTicket = By.xpath("//input[@value='Book ticket']");
+    private final By pageTitle = By.tagName("h1");
 
     // Elements
     public Select getSelectDepartDate() {
-        return new Select(Constant.WEBDRIVER.findElement(selectDepartDate));
+        return new Select(Constant.webdriver.get().findElement(selectDepartDate));
     }
 
     public Select getSelectDepartFrom() {
-        return new Select(Constant.WEBDRIVER.findElement(selectDepartFrom));
+        return new Select(Constant.webdriver.get().findElement(selectDepartFrom));
     }
 
     public Select getSelectArriveAt() {
-        return new Select(Constant.WEBDRIVER.findElement(selectArriveAt));
+        return new Select(Constant.webdriver.get().findElement(selectArriveAt));
     }
 
     public Select getSelectSeatType() {
-        return new Select(Constant.WEBDRIVER.findElement(selectSeatType));
+        return new Select(Constant.webdriver.get().findElement(selectSeatType));
     }
 
     public Select getSelectTicketAmount() {
-        return new Select(Constant.WEBDRIVER.findElement(selectTicketAmount));
+        return new Select(Constant.webdriver.get().findElement(selectTicketAmount));
     }
 
     public WebElement getBtnBookTicket() {
-        return Constant.WEBDRIVER.findElement(btnBookTicket);
+        return Constant.webdriver.get().findElement(btnBookTicket);
+    }
+
+    public WebElement getPageTitle() {
+        return Constant.webdriver.get().findElement(pageTitle);
     }
 
     // Methods
     public SuccessPage bookTicket(String departDate, String departFrom, String arriveAt, String seatType, String ticketAmount) {
+        Constant.wait.until(ExpectedConditions.textToBePresentInElement(getPageTitle(), "Book ticket"));
         getSelectDepartDate().selectByVisibleText(departDate);
         getSelectDepartFrom().selectByVisibleText(departFrom);
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        WebDriverWait wait = new WebDriverWait(Constant.webdriver.get(), Duration.ofSeconds(10));
+        if (!departFrom.equals("Sài Gòn"))
+            wait.until(ExpectedConditions.textToBePresentInElementLocated(selectArriveAt, "Sài Gòn"));
+        else
+            wait.until(ExpectedConditions.textToBePresentInElementLocated(selectArriveAt, "Phan Thiết"));
         getSelectArriveAt().selectByVisibleText(arriveAt);
         getSelectSeatType().selectByVisibleText(seatType);
         getSelectTicketAmount().selectByVisibleText(ticketAmount);

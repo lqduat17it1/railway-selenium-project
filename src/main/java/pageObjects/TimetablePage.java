@@ -8,11 +8,11 @@ public class TimetablePage {
 
     // Elements
     public WebElement getBtnCheckPrice(String departStation, String arriveStation) {
-        return Constant.WEBDRIVER.findElement(By.xpath("//td[text()='"+ departStation +"']/following-sibling::td[text()='"+ arriveStation +"']/../td[count(//th[text()='Check Price']/preceding-sibling::th)+1]"));
+        return Constant.webdriver.get().findElement(By.xpath("//td[text()='"+ departStation +"']/following-sibling::td[text()='"+ arriveStation +"']/../td[count(//th[text()='Check Price']/preceding-sibling::th)+1]"));
     }
 
     public WebElement getBtnBookTicket(String departStation, String arriveStation) {
-        return Constant.WEBDRIVER.findElement(By.xpath("//td[text()='"+ departStation +"']/following-sibling::td[text()='"+ arriveStation +"']/../td[count(//th[text()='Book ticket']/preceding-sibling::th)+1]"));
+        return Constant.webdriver.get().findElement(By.xpath("//td[text()='"+ departStation +"']/following-sibling::td[text()='"+ arriveStation +"']/../td[count(//th[text()='Book ticket']/preceding-sibling::th)+1]"));
     }
 
     // Methods

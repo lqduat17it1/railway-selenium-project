@@ -15,19 +15,19 @@ public class LoginPage {
 
     // Elements
     public WebElement getTxtUsername() {
-        return Constant.WEBDRIVER.findElement(txtUsername);
+        return Constant.webdriver.get().findElement(txtUsername);
     }
 
     public WebElement getTxtPassword() {
-        return Constant.WEBDRIVER.findElement(txtPassword);
+        return Constant.webdriver.get().findElement(txtPassword);
     }
 
     public WebElement getBtnLogin() {
-        return Constant.WEBDRIVER.findElement(btnLogin);
+        return Constant.webdriver.get().findElement(btnLogin);
     }
 
     public WebElement getLblLoginMsg() {
-        return Constant.WEBDRIVER.findElement(lblLoginErrorMsg);
+        return Constant.webdriver.get().findElement(lblLoginErrorMsg);
     }
 
     // Methods

@@ -16,23 +16,23 @@ public class SuccessPage {
 
     // Elements
     public WebElement getLblDepartStation() {
-        return Constant.WEBDRIVER.findElement(lblDepartStation);
+        return Constant.webdriver.get().findElement(lblDepartStation);
     }
 
     public WebElement getLblArriveStation() {
-        return Constant.WEBDRIVER.findElement(lblArriveStation);
+        return Constant.webdriver.get().findElement(lblArriveStation);
     }
 
     public WebElement getLblSeatType() {
-        return Constant.WEBDRIVER.findElement(lblSeatType);
+        return Constant.webdriver.get().findElement(lblSeatType);
     }
 
     public WebElement getLblDepartDate() {
-        return Constant.WEBDRIVER.findElement(lblDepartDate);
+        return Constant.webdriver.get().findElement(lblDepartDate);
     }
 
     public WebElement getLblAmount() {
-        return Constant.WEBDRIVER.findElement(lblAmount);
+        return Constant.webdriver.get().findElement(lblAmount);
     }
 
     // Methods

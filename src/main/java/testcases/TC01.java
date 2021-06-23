@@ -1,6 +1,6 @@
 package testcases;
 
-import common.Constant;
+import dataObjects.DataTestSet1;
 import org.testng.annotations.Test;
 import pageObjects.LoginPage;
 
@@ -15,15 +15,15 @@ public class TC01 extends BaseTest {
             LoginPage loginPage = homePage.gotoLoginPage();
             step(2, "Click on \"Login\" tab");
 
-            String actualMsg = loginPage.login(Constant.USERNAME, Constant.PASSWORD).getWelcomeMessage();
+            String actualMsg = loginPage.login(DataTestSet1.USERNAME, DataTestSet1.PASSWORD).getWelcomeMessage();
             step(3, "Enter valid Email and Password");
             node = test.createNode("Login info details (Step 3)");
-            node.info("Username: " + Constant.USERNAME);
-            node.info("Password: " + Constant.PASSWORD);
+            node.info("Username: " + DataTestSet1.USERNAME);
+            node.info("Password: " + DataTestSet1.PASSWORD);
 
             step(4, "Click on \"Login\" button");
 
-            String expectedMsg = "Welcome " + Constant.USERNAME;
+            String expectedMsg = "Welcome " + DataTestSet1.USERNAME;
 
             if (actualMsg.equals(expectedMsg)) {
                 pass("Login successfully. Welcome user message is displayed.");

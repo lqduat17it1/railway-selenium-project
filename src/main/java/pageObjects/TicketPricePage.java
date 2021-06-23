@@ -12,11 +12,11 @@ public class TicketPricePage {
 
     // Elements
     public WebElement getTxtStation() {
-        return Constant.WEBDRIVER.findElement(txtStation);
+        return Constant.webdriver.get().findElement(txtStation);
     }
 
     public WebElement getBtnBookTicket(String seatType) {
-        return Constant.WEBDRIVER.findElement(By.xpath("//td[text()='"+ seatType +"']/..//a"));
+        return Constant.webdriver.get().findElement(By.xpath("//td[text()='"+ seatType +"']/..//a"));
     }
 
     // Methods

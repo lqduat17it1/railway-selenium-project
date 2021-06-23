@@ -1,6 +1,6 @@
 package testcases;
 
-import common.Constant;
+import dataObjects.DataTestSet1;
 import org.testng.annotations.Test;
 import pageObjects.LoginPage;
 
@@ -15,11 +15,11 @@ public class TC06 extends BaseTest {
             LoginPage loginPage = homePage.gotoLoginPage();
             step(2, "Click on \"Login\" tab");
 
-            loginPage.login(Constant.USERNAME, Constant.PASSWORD);
+            loginPage.login(DataTestSet1.USERNAME, DataTestSet1.PASSWORD);
             step(3, "Login with valid account");
             node = test.createNode("Login info details (Step 3)");
-            node.info("Username: " + Constant.USERNAME);
-            node.info("Password: " + Constant.PASSWORD);
+            node.info("Username: " + DataTestSet1.USERNAME);
+            node.info("Password: " + DataTestSet1.PASSWORD);
 
             String[] tab = {"My ticket", "Change password", "Log out"};
             for (String s : tab) {

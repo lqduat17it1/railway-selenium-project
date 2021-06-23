@@ -12,11 +12,11 @@ public class FaqPage {
 
     // Elements
     public WebElement getLinkCreateAnAccount() {
-        return Constant.WEBDRIVER.findElement(linkCreateAnAccount);
+        return Constant.webdriver.get().findElement(linkCreateAnAccount);
     }
 
     public WebElement getLinkBookTicketPage() {
-        return Constant.WEBDRIVER.findElement(linkBookTicketPage);
+        return Constant.webdriver.get().findElement(linkBookTicketPage);
     }
 
 }

@@ -13,15 +13,15 @@ public class ForgotPasswordPage {
 
     // Elements
     public WebElement getTxtEmailAddress() {
-        return Constant.WEBDRIVER.findElement(txtEmailAddress);
+        return Constant.webdriver.get().findElement(txtEmailAddress);
     }
 
     public WebElement getBtnSend() {
-        return Constant.WEBDRIVER.findElement(btnSend);
+        return Constant.webdriver.get().findElement(btnSend);
     }
 
     public WebElement getLblMsgError() {
-        return Constant.WEBDRIVER.findElement(lblMsgError);
+        return Constant.webdriver.get().findElement(lblMsgError);
     }
 
     // Methods

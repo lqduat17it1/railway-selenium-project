@@ -1,6 +1,5 @@
 package testcases;
 
-import common.Constant;
 import dataObjects.DataTestSet1;
 import org.testng.annotations.Test;
 import pageObjects.BookTicketPage;
@@ -15,11 +14,11 @@ public class TC14 extends BaseTest {
 
         try {
             LoginPage loginPage = homePage.gotoLoginPage();
-            loginPage.login(Constant.USERNAME, Constant.PASSWORD);
+            loginPage.login(DataTestSet1.USERNAME, DataTestSet1.PASSWORD);
             step(2, "Login with a valid account ");
             node = test.createNode("Login info details (Step 2)");
-            node.info("Username: " + Constant.USERNAME);
-            node.info("Password: " + Constant.PASSWORD);
+            node.info("Username: " + DataTestSet1.USERNAME);
+            node.info("Password: " + DataTestSet1.PASSWORD);
 
             BookTicketPage bookTicketPage = homePage.gotoBookTicketPage();
             step(3, "Click on \"Book ticket\" tab");
@@ -27,7 +26,7 @@ public class TC14 extends BaseTest {
 
             boolean result = bookTicketPage.bookTicket(DataTestSet1.DEPART_DATE, DataTestSet1.DEPART_STATION, DataTestSet1.ARRIVE_STATION, DataTestSet1.SEAT_TYPE, DataTestSet1.AMOUNT).checkTicket(DataTestSet1.DEPART_STATION, DataTestSet1.ARRIVE_STATION, DataTestSet1.SEAT_TYPE, DataTestSet1.DEPART_DATE, DataTestSet1.AMOUNT);
             step(4, "Select depart date: " + DataTestSet1.DEPART_DATE);
-            step(5, "Select depart from: " + DataTestSet1.DEPART_STATION + " and " + DataTestSet1.ARRIVE_STATION + "for Arrive at");
+            step(5, "Select depart from: " + DataTestSet1.DEPART_STATION + " and " + DataTestSet1.ARRIVE_STATION + " for Arrive at");
             step(6, "Select seat type: "+ DataTestSet1.SEAT_TYPE);
             step(7, "Select ticket amount: "+ DataTestSet1.AMOUNT);
             step(8, "Click on \"Book ticket\" button");

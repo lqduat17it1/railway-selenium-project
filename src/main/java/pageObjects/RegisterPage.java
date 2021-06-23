@@ -3,8 +3,12 @@ package pageObjects;
 import common.Constant;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class RegisterPage {
@@ -21,35 +25,35 @@ public class RegisterPage {
 
     // Elements
     public WebElement getTxtEmail() {
-        return Constant.WEBDRIVER.findElement(txtEmail);
+        return Constant.webdriver.get().findElement(txtEmail);
     }
 
     public WebElement getTxtPassword() {
-        return Constant.WEBDRIVER.findElement(txtPassword);
+        return Constant.webdriver.get().findElement(txtPassword);
     }
 
     public WebElement getTxtConfirmPassword() {
-        return Constant.WEBDRIVER.findElement(txtConfirmPassword);
+        return Constant.webdriver.get().findElement(txtConfirmPassword);
     }
 
     public WebElement getTxtPid() {
-        return Constant.WEBDRIVER.findElement(txtPid);
+        return Constant.webdriver.get().findElement(txtPid);
     }
 
     public WebElement getBtnRegister() {
-        return Constant.WEBDRIVER.findElement(btnRegister);
+        return Constant.webdriver.get().findElement(btnRegister);
     }
 
     public WebElement getLblErrorMsg() {
-        return Constant.WEBDRIVER.findElement(lblErrorMsg);
+        return Constant.webdriver.get().findElement(lblErrorMsg);
     }
 
     public WebElement getLblErrorPasswordMsg() {
-        return Constant.WEBDRIVER.findElement(lblErrorPasswordMsg);
+        return Constant.webdriver.get().findElement(lblErrorPasswordMsg);
     }
 
     public WebElement getLblErrorPIDMsg() {
-        return Constant.WEBDRIVER.findElement(lblErrorPIDMsg);
+        return Constant.webdriver.get().findElement(lblErrorPIDMsg);
     }
 
     // Methods
@@ -59,10 +63,14 @@ public class RegisterPage {
         getTxtConfirmPassword().sendKeys(confirmPassword);
         getTxtPid().sendKeys(pid);
         getBtnRegister().sendKeys(Keys.ENTER);
+
         try {
-            TimeUnit.SECONDS.sleep(2);
+            if (!getLblErrorMsg().isDisplayed()) {
+                WebDriverWait wait = new WebDriverWait(Constant.webdriver.get(), Duration.ofSeconds(10));
+                wait.until(ExpectedConditions.invisibilityOfElementLocated(By.tagName("h1")));
+            }
         }
-        catch (Exception e) {
+        catch (NoSuchElementException e) {
             e.printStackTrace();
         }
 

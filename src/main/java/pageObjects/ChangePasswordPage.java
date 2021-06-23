@@ -15,23 +15,23 @@ public class ChangePasswordPage {
 
     // Elements
     public WebElement getTxtCurrentPassword() {
-        return Constant.WEBDRIVER.findElement(txtCurrentPassword);
+        return Constant.webdriver.get().findElement(txtCurrentPassword);
     }
 
     public WebElement getTxtNewPassword() {
-        return Constant.WEBDRIVER.findElement(txtNewPassword);
+        return Constant.webdriver.get().findElement(txtNewPassword);
     }
 
     public WebElement getTxtConfirmPassword() {
-        return Constant.WEBDRIVER.findElement(txtConfirmPassword);
+        return Constant.webdriver.get().findElement(txtConfirmPassword);
     }
 
     public WebElement getBtnChangePassword() {
-        return Constant.WEBDRIVER.findElement(btnChangePassword);
+        return Constant.webdriver.get().findElement(btnChangePassword);
     }
 
     public WebElement getLblErrorMsg() {
-        return Constant.WEBDRIVER.findElement(lblErrorMsg);
+        return Constant.webdriver.get().findElement(lblErrorMsg);
     }
 
     // Methods

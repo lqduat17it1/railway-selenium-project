@@ -6,18 +6,16 @@ import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import common.Constant;
 import common.Utilities;
-import dataObjects.DataTestSet1;
-import org.testng.ITestResult;
 import org.testng.annotations.*;
 import org.testng.annotations.Test;
 import pageObjects.HomePage;
 
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -25,8 +23,8 @@ public class BaseTest {
 
     public static ExtentReports report = new ExtentReports();
     public static ExtentSparkReporter spark;
-    public static ExtentTest test;
-    public static ExtentTest node;
+    public ExtentTest test;
+    public ExtentTest node;
     HomePage homePage = new HomePage();
 
     Date date = Calendar.getInstance().getTime();
@@ -36,20 +34,29 @@ public class BaseTest {
     private String filePath = "Report\\";
 
     @Parameters("browser")
-    @BeforeSuite
-    public void beforeSuite(String browser) {
+    @BeforeTest
+    public void beforeTest(String browser) {
         filePath = filePath + browser + " - " + "Report " + strDate + ".html";
         spark = new ExtentSparkReporter(filePath);
         spark.config().setDocumentTitle("Le Quang Duat - Report");
         report.attachReporter(spark);
     }
 
+    @AfterTest
+    public void afterTest() throws IOException {
+        report.flush();
+        File file = new File(filePath);
+        Desktop.getDesktop().open(file);
+    }
+
     @Parameters({"browser", "mode"})
     @BeforeMethod
     public void beforeMethod(Method method, String browser, String mode) throws Exception {
-        System.out.println(DataTestSet1.NEW_USERNAME);
-        Utilities.setBrowser(browser, mode);
-        Constant.WEBDRIVER.manage().window().maximize();
+        System.out.println(Thread.currentThread().getId());
+        Constant constant = new Constant();
+        constant.setDriver(browser, mode);
+        Constant.webdriver.set(constant.getDriver());
+        constant.getDriver().manage().window().maximize();
         Test t = method.getAnnotation(Test.class);
         test = report.createTest(t.description());
         test.assignDevice(browser);
@@ -57,21 +64,8 @@ public class BaseTest {
     }
 
     @AfterMethod
-    public void afterMethod(ITestResult result) {
-        Constant.WEBDRIVER.quit();
-    }
-
-    @AfterSuite
-    public void afterSuite() {
-        report.flush();
-
-        try {
-            File file = new File(filePath);
-            Desktop.getDesktop().open(file);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void afterMethod() {
+        Constant.webdriver.get().quit();
     }
 
     public ExtentTest pass(String msg) {

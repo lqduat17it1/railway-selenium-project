@@ -4,9 +4,12 @@ import common.Constant;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class MyTicketPage {
@@ -20,31 +23,31 @@ public class MyTicketPage {
 
     // Elements
     public Select getSelectDepartStation() {
-        return new Select(Constant.WEBDRIVER.findElement(selectDepartStation));
+        return new Select(Constant.webdriver.get().findElement(selectDepartStation));
     }
 
     public Select getSelectArriveStation() {
-        return new Select(Constant.WEBDRIVER.findElement(selectArriveStation));
+        return new Select(Constant.webdriver.get().findElement(selectArriveStation));
     }
 
     public WebElement getTxtDepartDate() {
-        return Constant.WEBDRIVER.findElement(txtDepartDate);
+        return Constant.webdriver.get().findElement(txtDepartDate);
     }
 
     public Select getSelectStatus() {
-        return new Select(Constant.WEBDRIVER.findElement(selectStatus));
+        return new Select(Constant.webdriver.get().findElement(selectStatus));
     }
 
     public WebElement getBtnApplyFilter() {
-        return Constant.WEBDRIVER.findElement(btnApplyFilter);
+        return Constant.webdriver.get().findElement(btnApplyFilter);
     }
 
     public WebElement getBtnOperation(String departStation, String arriveStation) {
-        return Constant.WEBDRIVER.findElement(By.xpath("//td[text()='"+ departStation +"']/following-sibling::td[text()='"+ arriveStation +"']/../td[count(//th[text()='Operation']/preceding-sibling::th)+1]"));
+        return Constant.webdriver.get().findElement(By.xpath("//td[text()='"+ departStation +"']/following-sibling::td[text()='"+ arriveStation +"']/../td[count(//th[text()='Operation']/preceding-sibling::th)+1]"));
     }
 
     public WebElement getTicket(String departStation, String arriveStation, String departDate, String seatType, String amount) {
-        return Constant.WEBDRIVER.findElement(By.xpath("//td[text()='"+ departStation +"']/../td[text()='"+ arriveStation +"']/../td[text()='"+ seatType +"']/../td[text()='"+ departDate +"']/../td[text()='"+ amount +"']"));
+        return Constant.webdriver.get().findElement(By.xpath("//td[text()='"+ departStation +"']/../td[text()='"+ arriveStation +"']/../td[text()='"+ seatType +"']/../td[text()='"+ departDate +"']/../td[text()='"+ amount +"']"));
     }
 
     // Methods
@@ -60,26 +63,21 @@ public class MyTicketPage {
         getBtnApplyFilter().click();
     }
 
-    public void checkTicketExists(String departStation, String arriveStation, String seatType, String departDate, String amount) {
-        boolean rs = getTicket(departStation, arriveStation, seatType, departDate, amount).isDisplayed();
-        Assert.assertTrue(rs);
-    }
-
-    public boolean checkTicketNotExists(String departStation, String arriveStation, String seatType, String departDate, String amount) {
+    public boolean checkTicketExists(String departStation, String arriveStation, String seatType, String departDate, String amount) {
         try {
-            TimeUnit.SECONDS.sleep(1);
-            boolean rs = getTicket(departStation, arriveStation, seatType, departDate, amount).isDisplayed();
-            return !rs;
+            return getTicket(departStation, arriveStation, seatType, departDate, amount).isDisplayed();
         }
-        catch (Exception e) {
-            e.printStackTrace();
+        catch (NoSuchElementException e) {
             return false;
         }
     }
 
+
     public void deleteTicket(String departStation, String arriveStation) {
         getBtnOperation(departStation, arriveStation).click();
-        Constant.WEBDRIVER.switchTo().alert().accept();
+        WebDriverWait wait = new WebDriverWait(Constant.webdriver.get(), Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.alertIsPresent());
+        Constant.webdriver.get().switchTo().alert().accept();
     }
 
 }

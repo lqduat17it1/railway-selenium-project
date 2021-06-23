@@ -11,10 +11,10 @@ public class TC10 extends BaseTest {
         homePage.open();
         step(1, "Navigate to QA Railway Website");
 
-        RegisterPage registerPage = homePage.gotoRegisterPage();
-        step(2, "Click on \"Register\" tab");
-
         try {
+            RegisterPage registerPage = homePage.gotoRegisterPage();
+            step(2, "Click on \"Register\" tab");
+
             String successMsg = registerPage.register("99" + DataTestSet1.NEW_USERNAME, DataTestSet1.NEW_PASSWORD, DataTestSet1.NEW_PASSWORD + "123", DataTestSet1.NEW_PID).getMessage();
             step(3, "Enter valid information into all fields except \"Confirm password\" is not the same with \"Password\"");
             node = test.createNode("Register info details (Step 3)");

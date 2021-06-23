@@ -2,6 +2,7 @@ package testcases;
 
 import common.Constant;
 import common.Utilities;
+import dataObjects.DataTestSet1;
 import org.testng.annotations.Test;
 import pageObjects.LoginPage;
 
@@ -19,9 +20,10 @@ public class TC05 extends BaseTest {
             step(3, "Login with invalid info for 4 times");
             node = test.createNode(passFormat("Login info details (Step 3)"));
             for (int i = 1; i <= 4; i++) {
-                Utilities.scrollDown();
-                loginPage.login(Constant.USERNAME, "12345678910");
-                node.info(i + ". Login with username \"" + Constant.USERNAME + "\" and password \"12345678910\" ");
+                Constant.scrollDown();
+                Utilities.clearTextInput(loginPage.getTxtUsername());
+                loginPage.login(DataTestSet1.USERNAME, "12345678910");
+                node.info(i + ". Login with username \"" + DataTestSet1.USERNAME + "\" and password \"12345678910\" ");
             }
 
             String actualMsg = loginPage.getLblLoginMsg().getText();

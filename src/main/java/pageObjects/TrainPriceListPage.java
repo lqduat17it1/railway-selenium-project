@@ -8,7 +8,7 @@ public class TrainPriceListPage {
 
     // Elements
     public WebElement getBtnCheckPrice(String departStation, String arriveStation) {
-        return Constant.WEBDRIVER.findElement(By.xpath("//td/li[text()='"+ departStation + " to " + arriveStation +"']/ancestor::tr//a"));
+        return Constant.webdriver.get().findElement(By.xpath("//td/li[text()='"+ departStation + " to " + arriveStation +"']/ancestor::tr//a"));
     }
 
     // Methods
