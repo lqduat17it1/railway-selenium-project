@@ -4,8 +4,9 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import common.Constant;
+import common.Driver;
 import common.Utilities;
+import org.openqa.selenium.Dimension;
 import org.testng.annotations.*;
 import org.testng.annotations.Test;
 import pageObjects.HomePage;
@@ -53,10 +54,12 @@ public class BaseTest {
     @BeforeMethod
     public void beforeMethod(Method method, String browser, String mode) throws Exception {
         System.out.println(Thread.currentThread().getId());
-        Constant constant = new Constant();
-        constant.setDriver(browser, mode);
-        Constant.webdriver.set(constant.getDriver());
-        constant.getDriver().manage().window().maximize();
+        Driver.setDriver(browser, mode);
+        Driver.webdriver.set(Driver.getDriver());
+        if (mode.equalsIgnoreCase("headless"))
+            Driver.getDriver().manage().window().setSize(new Dimension(Utilities.getScreenWidth(), Utilities.getScreenHeight()));
+        else
+            Driver.getDriver().manage().window().maximize();
         Test t = method.getAnnotation(Test.class);
         test = report.createTest(t.description());
         test.assignDevice(browser);
@@ -65,7 +68,7 @@ public class BaseTest {
 
     @AfterMethod
     public void afterMethod() {
-        Constant.webdriver.get().quit();
+        Driver.closeDriver();
     }
 
     public ExtentTest pass(String msg) {

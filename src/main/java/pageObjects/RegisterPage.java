@@ -1,15 +1,14 @@
 package pageObjects;
 
-import common.Constant;
+import common.Driver;
+import dataObjects.DataTestSet1;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 public class RegisterPage {
 
@@ -25,35 +24,35 @@ public class RegisterPage {
 
     // Elements
     public WebElement getTxtEmail() {
-        return Constant.webdriver.get().findElement(txtEmail);
+        return Driver.getDriver().findElement(txtEmail);
     }
 
     public WebElement getTxtPassword() {
-        return Constant.webdriver.get().findElement(txtPassword);
+        return Driver.getDriver().findElement(txtPassword);
     }
 
     public WebElement getTxtConfirmPassword() {
-        return Constant.webdriver.get().findElement(txtConfirmPassword);
+        return Driver.getDriver().findElement(txtConfirmPassword);
     }
 
     public WebElement getTxtPid() {
-        return Constant.webdriver.get().findElement(txtPid);
+        return Driver.getDriver().findElement(txtPid);
     }
 
     public WebElement getBtnRegister() {
-        return Constant.webdriver.get().findElement(btnRegister);
+        return Driver.getDriver().findElement(btnRegister);
     }
 
     public WebElement getLblErrorMsg() {
-        return Constant.webdriver.get().findElement(lblErrorMsg);
+        return Driver.getDriver().findElement(lblErrorMsg);
     }
 
     public WebElement getLblErrorPasswordMsg() {
-        return Constant.webdriver.get().findElement(lblErrorPasswordMsg);
+        return Driver.getDriver().findElement(lblErrorPasswordMsg);
     }
 
     public WebElement getLblErrorPIDMsg() {
-        return Constant.webdriver.get().findElement(lblErrorPIDMsg);
+        return Driver.getDriver().findElement(lblErrorPIDMsg);
     }
 
     // Methods
@@ -62,12 +61,12 @@ public class RegisterPage {
         getTxtPassword().sendKeys(password);
         getTxtConfirmPassword().sendKeys(confirmPassword);
         getTxtPid().sendKeys(pid);
-        getBtnRegister().sendKeys(Keys.ENTER);
+        getBtnRegister().click();
 
         try {
             if (!getLblErrorMsg().isDisplayed()) {
-                WebDriverWait wait = new WebDriverWait(Constant.webdriver.get(), Duration.ofSeconds(10));
-                wait.until(ExpectedConditions.invisibilityOfElementLocated(By.tagName("h1")));
+                WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
+                wait.until(ExpectedConditions.urlContains(DataTestSet1.CONFIRM_PAGE_URL));
             }
         }
         catch (NoSuchElementException e) {

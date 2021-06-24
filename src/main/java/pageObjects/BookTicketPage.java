@@ -1,6 +1,6 @@
 package pageObjects;
 
-import common.Constant;
+import common.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -23,39 +23,39 @@ public class BookTicketPage {
 
     // Elements
     public Select getSelectDepartDate() {
-        return new Select(Constant.webdriver.get().findElement(selectDepartDate));
+        return new Select(Driver.getDriver().findElement(selectDepartDate));
     }
 
     public Select getSelectDepartFrom() {
-        return new Select(Constant.webdriver.get().findElement(selectDepartFrom));
+        return new Select(Driver.getDriver().findElement(selectDepartFrom));
     }
 
     public Select getSelectArriveAt() {
-        return new Select(Constant.webdriver.get().findElement(selectArriveAt));
+        return new Select(Driver.getDriver().findElement(selectArriveAt));
     }
 
     public Select getSelectSeatType() {
-        return new Select(Constant.webdriver.get().findElement(selectSeatType));
+        return new Select(Driver.getDriver().findElement(selectSeatType));
     }
 
     public Select getSelectTicketAmount() {
-        return new Select(Constant.webdriver.get().findElement(selectTicketAmount));
+        return new Select(Driver.getDriver().findElement(selectTicketAmount));
     }
 
     public WebElement getBtnBookTicket() {
-        return Constant.webdriver.get().findElement(btnBookTicket);
+        return Driver.getDriver().findElement(btnBookTicket);
     }
 
     public WebElement getPageTitle() {
-        return Constant.webdriver.get().findElement(pageTitle);
+        return Driver.getDriver().findElement(pageTitle);
     }
 
     // Methods
     public SuccessPage bookTicket(String departDate, String departFrom, String arriveAt, String seatType, String ticketAmount) {
-        Constant.wait.until(ExpectedConditions.textToBePresentInElement(getPageTitle(), "Book ticket"));
+        Driver.wait.until(ExpectedConditions.textToBePresentInElement(getPageTitle(), "Book ticket"));
         getSelectDepartDate().selectByVisibleText(departDate);
         getSelectDepartFrom().selectByVisibleText(departFrom);
-        WebDriverWait wait = new WebDriverWait(Constant.webdriver.get(), Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
         if (!departFrom.equals("Sài Gòn"))
             wait.until(ExpectedConditions.textToBePresentInElementLocated(selectArriveAt, "Sài Gòn"));
         else

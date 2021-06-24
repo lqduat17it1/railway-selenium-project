@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="Set1" parallel="methods" thread-count="6">
+<suite name="Set1" parallel="methods" thread-count="5">
     <test name="Set1" >
-        <parameter name="browser" value="Chrome" /> <!--Chrome, Firefox, Edge-->
-        <parameter name="mode" value="headless" />    <!--headless or normal-->
+        <parameter name="browser" value="Edge" /> <!--Chrome, Firefox, Edge-->
+        <parameter name="mode" value="normal" />    <!--headless or normal-->
         <classes>
             <class name="testcases.TC01" />
             <class name="testcases.TC02" />

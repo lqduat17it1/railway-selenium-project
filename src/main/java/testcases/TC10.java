@@ -1,5 +1,6 @@
 package testcases;
 
+import common.Utilities;
 import dataObjects.DataTestSet1;
 import org.testng.annotations.Test;
 import pageObjects.RegisterPage;
@@ -15,13 +16,15 @@ public class TC10 extends BaseTest {
             RegisterPage registerPage = homePage.gotoRegisterPage();
             step(2, "Click on \"Register\" tab");
 
-            String successMsg = registerPage.register("99" + DataTestSet1.NEW_USERNAME, DataTestSet1.NEW_PASSWORD, DataTestSet1.NEW_PASSWORD + "123", DataTestSet1.NEW_PID).getMessage();
+            String USERNAME = Utilities.getRandomNumber() + DataTestSet1.USERNAME;
+            String CONFIRM_PASSWORD = DataTestSet1.PASSWORD + Utilities.getRandomNumber();
+            String successMsg = registerPage.register(USERNAME, DataTestSet1.PASSWORD, CONFIRM_PASSWORD, DataTestSet1.PID).getMessage();
             step(3, "Enter valid information into all fields except \"Confirm password\" is not the same with \"Password\"");
             node = test.createNode("Register info details (Step 3)");
-            node.info("Username: " + "99" + DataTestSet1.NEW_USERNAME);
-            node.info("Password: " + DataTestSet1.NEW_PASSWORD);
-            node.info("Confirm password: " + DataTestSet1.NEW_PASSWORD + "123");
-            node.info("PID: "+ DataTestSet1.NEW_PID);
+            node.info("Username: " + USERNAME);
+            node.info("Password: " + DataTestSet1.PASSWORD);
+            node.info("Confirm password: " + CONFIRM_PASSWORD);
+            node.info("PID: "+ DataTestSet1.PID);
             step(4, "Click on \"Register\" button");
 
             String actualMsg = registerPage.getMessage();

@@ -15,13 +15,13 @@ public class TC07 extends BaseTest {
             RegisterPage registerPage = homePage.gotoRegisterPage();
             step(2, "Click on \"Register\" tab");
 
-            String actualMsg = registerPage.register(DataTestSet1.NEW_USERNAME, DataTestSet1.NEW_PASSWORD, DataTestSet1.NEW_PASSWORD, DataTestSet1.NEW_PID).getMessage();
+            String actualMsg = registerPage.register(DataTestSet1.USERNAME_TC07, DataTestSet1.PASSWORD_TC07, DataTestSet1.PASSWORD_TC07, DataTestSet1.PID_TC07).getMessage();
             step(3, "Enter valid information into all fields");
             node = test.createNode("Register info details (Step 3)");
-            node.info("Username: " + DataTestSet1.NEW_USERNAME);
-            node.info("Password: " + DataTestSet1.NEW_PASSWORD);
-            node.info("Confirm password: " + DataTestSet1.NEW_PASSWORD);
-            node.info("PID: " + DataTestSet1.NEW_PID);
+            node.info("Username: " + DataTestSet1.USERNAME_TC07);
+            node.info("Password: " + DataTestSet1.PASSWORD_TC07);
+            node.info("Confirm password: " + DataTestSet1.PASSWORD_TC07);
+            node.info("PID: " + DataTestSet1.PID_TC07);
 
             String expectedMsg = "Thank you for registering your account";
 

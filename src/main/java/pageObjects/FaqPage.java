@@ -1,6 +1,6 @@
 package pageObjects;
 
-import common.Constant;
+import common.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -12,11 +12,11 @@ public class FaqPage {
 
     // Elements
     public WebElement getLinkCreateAnAccount() {
-        return Constant.webdriver.get().findElement(linkCreateAnAccount);
+        return Driver.getDriver().findElement(linkCreateAnAccount);
     }
 
     public WebElement getLinkBookTicketPage() {
-        return Constant.webdriver.get().findElement(linkBookTicketPage);
+        return Driver.getDriver().findElement(linkBookTicketPage);
     }
 
 }

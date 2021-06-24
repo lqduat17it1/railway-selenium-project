@@ -1,5 +1,6 @@
 package testcases;
 
+import common.Utilities;
 import dataObjects.DataTestSet1;
 import org.testng.annotations.Test;
 import pageObjects.RegisterPage;
@@ -15,10 +16,11 @@ public class TC11 extends BaseTest {
             RegisterPage registerPage = homePage.gotoRegisterPage();
             step(2, "Click on \"Register\" tab");
 
-            String successMsg = registerPage.register("99" + DataTestSet1.NEW_USERNAME, "", "", "").getMessage();
+            String USERNAME = Utilities.getRandomNumber() + DataTestSet1.USERNAME;
+            String successMsg = registerPage.register(USERNAME, "", "", "").getMessage();
             step(3, "Enter valid email address and leave other fields empty");
             node = test.createNode("Register info details (Step 3)");
-            node.info("Username: " + "99" + DataTestSet1.NEW_USERNAME);
+            node.info("Username: " + "99" + USERNAME);
             node.info("Password: ");
             node.info("Confirm password: ");
             node.info("PID: ");

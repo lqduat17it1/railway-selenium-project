@@ -24,11 +24,12 @@ public class TC14 extends BaseTest {
             step(3, "Click on \"Book ticket\" tab");
 
 
-            boolean result = bookTicketPage.bookTicket(DataTestSet1.DEPART_DATE, DataTestSet1.DEPART_STATION, DataTestSet1.ARRIVE_STATION, DataTestSet1.SEAT_TYPE, DataTestSet1.AMOUNT).checkTicket(DataTestSet1.DEPART_STATION, DataTestSet1.ARRIVE_STATION, DataTestSet1.SEAT_TYPE, DataTestSet1.DEPART_DATE, DataTestSet1.AMOUNT);
-            step(4, "Select depart date: " + DataTestSet1.DEPART_DATE);
-            step(5, "Select depart from: " + DataTestSet1.DEPART_STATION + " and " + DataTestSet1.ARRIVE_STATION + " for Arrive at");
-            step(6, "Select seat type: "+ DataTestSet1.SEAT_TYPE);
-            step(7, "Select ticket amount: "+ DataTestSet1.AMOUNT);
+            boolean result = bookTicketPage.bookTicket(DataTestSet1.DEPART_DATE_TC14, DataTestSet1.DEPART_STATION_TC14, DataTestSet1.ARRIVE_STATION_TC14, DataTestSet1.SEAT_TYPE_TC14, DataTestSet1.AMOUNT_TC14)
+                    .checkTicket(DataTestSet1.DEPART_STATION_TC14, DataTestSet1.ARRIVE_STATION_TC14, DataTestSet1.SEAT_TYPE_TC14, DataTestSet1.DEPART_DATE_TC14, DataTestSet1.AMOUNT_TC14);
+            step(4, "Select depart date: " + DataTestSet1.DEPART_DATE_TC14);
+            step(5, "Select depart from: " + DataTestSet1.DEPART_STATION_TC14 + " and " + DataTestSet1.ARRIVE_STATION_TC14 + " for Arrive at");
+            step(6, "Select seat type: "+ DataTestSet1.SEAT_TYPE_TC14);
+            step(7, "Select ticket amount: "+ DataTestSet1.AMOUNT_TC14);
             step(8, "Click on \"Book ticket\" button");
 
             if (result) {

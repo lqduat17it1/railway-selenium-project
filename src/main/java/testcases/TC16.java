@@ -38,6 +38,7 @@ public class TC16 extends BaseTest {
             myTicketPage.deleteTicket(DataTestSet1.DEPART_STATION_TC16, DataTestSet1.ARRIVE_STATION_TC16);
             step(5, "Cancel ticket with depart station \"" + DataTestSet1.DEPART_STATION_TC16 + "\" and arrive station \"" + DataTestSet1.ARRIVE_STATION_TC16 + "\"");
             step(6, "Click on \"OK\" button on Confirmation message \"Are you sure?\"");
+            Utilities.stopForShortTime();
 
             boolean result = myTicketPage.checkTicketExists(DataTestSet1.DEPART_STATION_TC16, DataTestSet1.ARRIVE_STATION_TC16, DataTestSet1.SEAT_TYPE_TC16, DataTestSet1.DEPART_DATE_TC16, DataTestSet1.AMOUNT_TC16);
             if (!result)

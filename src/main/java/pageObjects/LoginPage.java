@@ -1,8 +1,7 @@
 package pageObjects;
 
-import common.Constant;
+import common.Driver;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 public class LoginPage {
@@ -15,19 +14,19 @@ public class LoginPage {
 
     // Elements
     public WebElement getTxtUsername() {
-        return Constant.webdriver.get().findElement(txtUsername);
+        return Driver.getDriver().findElement(txtUsername);
     }
 
     public WebElement getTxtPassword() {
-        return Constant.webdriver.get().findElement(txtPassword);
+        return Driver.getDriver().findElement(txtPassword);
     }
 
     public WebElement getBtnLogin() {
-        return Constant.webdriver.get().findElement(btnLogin);
+        return Driver.getDriver().findElement(btnLogin);
     }
 
     public WebElement getLblLoginMsg() {
-        return Constant.webdriver.get().findElement(lblLoginErrorMsg);
+        return Driver.getDriver().findElement(lblLoginErrorMsg);
     }
 
     // Methods

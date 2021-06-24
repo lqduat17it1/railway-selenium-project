@@ -1,6 +1,5 @@
 package testcases;
 
-import common.Constant;
 import common.Utilities;
 import dataObjects.DataTestSet1;
 import org.testng.annotations.Test;
@@ -28,7 +27,7 @@ public class TC15 extends BaseTest {
             step(3, "Click on \"Timetable\" tab");
 
             BookTicketPage bookTicketPage = timetablePage.clickBookTicket("Huế", "Sài Gòn");
-            Constant.scrollDown();
+            Utilities.scrollDown();
             step(4, "Click book ticket link with depart station \"Huế\" and arrive station \"Sài Gòn\"");
 
             if (bookTicketPage.getSelectDepartFrom().getFirstSelectedOption().getText().equals("Huế"))

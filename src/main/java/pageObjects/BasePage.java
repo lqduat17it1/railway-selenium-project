@@ -1,14 +1,10 @@
 package pageObjects;
 
 
-import common.Constant;
+import common.Driver;
 import common.Utilities;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class BasePage {
 
@@ -28,47 +24,47 @@ public class BasePage {
 
     // Element
     protected WebElement getTabLogin() {
-        return Constant.webdriver.get().findElement(tabLogin);
+        return Driver.getDriver().findElement(tabLogin);
     }
 
     protected WebElement getTabLogout() {
-        return Constant.webdriver.get().findElement(tabLogout);
+        return Driver.getDriver().findElement(tabLogout);
     }
 
     protected WebElement getLblWelcomeMessage() {
-        return Constant.webdriver.get().findElement(lblWelcomeMessage);
+        return Driver.getDriver().findElement(lblWelcomeMessage);
     }
 
     protected WebElement getTabRegister() {
-        return Constant.webdriver.get().findElement(tabRegister);
+        return Driver.getDriver().findElement(tabRegister);
     }
 
     protected WebElement getTabBookTicket() {
-        return Constant.webdriver.get().findElement(tabBookTicket);
+        return Driver.getDriver().findElement(tabBookTicket);
     }
 
     protected WebElement getTabMyTicket() {
-        return Constant.webdriver.get().findElement(tabMyTicket);
+        return Driver.getDriver().findElement(tabMyTicket);
     }
 
     protected WebElement getTabTicketPrice() {
-        return Constant.webdriver.get().findElement(tabTicketPrice);
+        return Driver.getDriver().findElement(tabTicketPrice);
     }
 
     protected WebElement getTabTimetable() {
-        return Constant.webdriver.get().findElement(tabTimetable);
+        return Driver.getDriver().findElement(tabTimetable);
     }
 
     protected WebElement getTabContact() {
-        return Constant.webdriver.get().findElement(tabContact);
+        return Driver.getDriver().findElement(tabContact);
     }
 
     protected WebElement getTabChangePassword() {
-        return Constant.webdriver.get().findElement(tabChangePassword);
+        return Driver.getDriver().findElement(tabChangePassword);
     }
 
     public WebElement getPageTitle() {
-        return Constant.webdriver.get().findElement(pageTitle);
+        return Driver.getDriver().findElement(pageTitle);
     }
 
     // Methods
@@ -78,7 +74,7 @@ public class BasePage {
 
     public LoginPage gotoLoginPage() {
         getTabLogin().click();
-        Constant.scrollDown();
+        Utilities.scrollDown();
         return new LoginPage();
     }
 
@@ -89,19 +85,19 @@ public class BasePage {
 
     public RegisterPage gotoRegisterPage() {
         getTabRegister().click();
-        Constant.scrollDown();
+        Utilities.scrollDown();
         return new RegisterPage();
     }
 
     public BookTicketPage gotoBookTicketPage() {
         getTabBookTicket().click();
-        Constant.scrollDown();
+        Utilities.scrollDown();
         return new BookTicketPage();
     }
 
     public MyTicketPage gotoMyTicketPage() {
         getTabMyTicket().click();
-        Constant.scrollDown();
+        Utilities.scrollDown();
         return new MyTicketPage();
     }
 
@@ -112,7 +108,7 @@ public class BasePage {
 
     public TimetablePage gotoTimetablePage() {
         getTabTimetable().click();
-        Constant.scrollDown();
+        Utilities.scrollDown();
         return new TimetablePage();
     }
 
@@ -123,12 +119,12 @@ public class BasePage {
 
     public ChangePasswordPage gotoChangePasswordPage() {
         getTabChangePassword().click();
-        Constant.scrollDown();
+        Utilities.scrollDown();
         return new ChangePasswordPage();
     }
 
     public String getTabSelected() {
-        return Constant.webdriver.get().findElement(tabSelected).getText();
+        return Driver.getDriver().findElement(tabSelected).getText();
     }
 
     public boolean checkPageTitle(String pageTitle) {
@@ -138,7 +134,7 @@ public class BasePage {
 
     public boolean checkTabExists(String tabName) {
         try {
-            String tab = Constant.webdriver.get().findElement(By.xpath("//div[@id='menu']//span[text()='"+ tabName +"']")).getText();
+            String tab = Driver.getDriver().findElement(By.xpath("//div[@id='menu']//span[text()='"+ tabName +"']")).getText();
             return tab.equals(tabName);
         }
         catch (Exception e) {

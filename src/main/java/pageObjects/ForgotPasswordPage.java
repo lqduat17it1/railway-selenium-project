@@ -1,6 +1,6 @@
 package pageObjects;
 
-import common.Constant;
+import common.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -13,15 +13,15 @@ public class ForgotPasswordPage {
 
     // Elements
     public WebElement getTxtEmailAddress() {
-        return Constant.webdriver.get().findElement(txtEmailAddress);
+        return Driver.getDriver().findElement(txtEmailAddress);
     }
 
     public WebElement getBtnSend() {
-        return Constant.webdriver.get().findElement(btnSend);
+        return Driver.getDriver().findElement(btnSend);
     }
 
     public WebElement getLblMsgError() {
-        return Constant.webdriver.get().findElement(lblMsgError);
+        return Driver.getDriver().findElement(lblMsgError);
     }
 
     // Methods

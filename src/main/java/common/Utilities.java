@@ -1,96 +1,27 @@
 package common;
 
-import org.checkerframework.checker.units.qual.C;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.io.FileHandler;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 
 public class Utilities {
 
-//    public static void setBrowser(String browser) throws Exception {
-//        switch (browser) {
-//            case "Chrome":
-//                System.setProperty("webdriver.chrome.driver", "Executables/chromedriver.exe");
-//                Constant.webdriver.get() = new ChromeDriver();
-//                break;
-//            case "Firefox":
-//                System.setProperty("webdriver.gecko.driver", "Executables/geckodriver.exe");
-//                Constant.webdriver.get() = new FirefoxDriver();
-//                break;
-//            case "Edge":
-//                System.setProperty("webdriver.edge.driver", "Executables/msedgedriver.exe");
-//                Constant.webdriver.get() = new EdgeDriver();
-//                break;
-//            case "IE":
-//                System.setProperty("webdriver.ie.driver", "Executables/IEDriverServer.exe");
-//                Constant.webdriver.get() = new InternetExplorerDriver();
-//                break;
-//            default:
-//                throw new Exception("Browser is not available");
-//        }
-//
-//        Constant.js = (JavascriptExecutor) Constant.webdriver.get();
-//    }
-//
-//    public static void setBrowser(String browser, String mode) throws Exception {
-//        switch (browser) {
-//            case "Chrome": {
-//                System.setProperty("webdriver.chrome.driver", "Executables/chromedriver.exe");
-//                ChromeOptions options = new ChromeOptions();
-//                options.addArguments("headless");
-//                if (mode.equals("headless"))
-//                    Constant.webdriver.get() = new ChromeDriver(options);
-//                else
-//                    Constant.webdriver.get() = new ChromeDriver();
-//                break;
-//            }
-//            case "Firefox": {
-//                System.setProperty("webdriver.gecko.driver", "Executables/geckodriver.exe");
-//                FirefoxOptions options = new FirefoxOptions();
-//                options.setHeadless(true);
-//                if (mode.equals("headless"))
-//                    Constant.webdriver.get() = new FirefoxDriver(options);
-//                else
-//                    Constant.webdriver.get() = new FirefoxDriver();
-//                break;
-//            }
-//            case "Edge": {
-//                System.setProperty("webdriver.edge.driver", "Executables/msedgedriver.exe");
-//                EdgeOptions options = new EdgeOptions();
-//                options.addArguments("headless");
-//                if (mode.equals("headless"))
-//                    Constant.webdriver.get() = new EdgeDriver(options);
-//                else
-//                    Constant.webdriver.get() = new EdgeDriver();
-//                break;
-//            }
-//            case "IE":
-//                System.setProperty("webdriver.ie.driver", "Executables/IEDriverServer.exe");
-//                Constant.webdriver.get() = new InternetExplorerDriver();
-//                break;
-//            default:
-//                throw new Exception("Browser is not available");
-//        }
-//
-//        Constant.js = (JavascriptExecutor) Constant.webdriver.get();
-//    }
+    public static Random rd = new Random();
+
+    public static int getRandomNumber() {
+        return rd.nextInt(1000000);
+    }
 
     public static String getScreenshotName(String methodName) {
         Date date = Calendar.getInstance().getTime();
@@ -107,7 +38,7 @@ public class Utilities {
         String path = directory + fileName;
 
         try {
-            File screenshot = ((TakesScreenshot)Constant.webdriver.get()).getScreenshotAs(OutputType.FILE);
+            File screenshot = ((TakesScreenshot) Driver.webdriver.get()).getScreenshotAs(OutputType.FILE);
             FileHandler.copy(screenshot, new File(path));
             System.out.println(path);
         } catch (IOException e) {
@@ -118,6 +49,21 @@ public class Utilities {
 
     public static void clearTextInput(WebElement element) {
         element.clear();
+    }
+
+    public static void scrollDown() {
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver() ;
+        js.executeScript("window.scrollBy(0,2000)");
+    }
+
+    public static int getScreenWidth() {
+        Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+        return (int)size.getWidth();
+    }
+
+    public static int getScreenHeight() {
+        Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+        return (int)size.getHeight();
     }
 
     public static void stopForShortTime() throws InterruptedException {

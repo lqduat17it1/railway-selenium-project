@@ -1,6 +1,6 @@
 package pageObjects;
 
-import common.Constant;
+import common.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -8,7 +8,7 @@ public class TrainPriceListPage {
 
     // Elements
     public WebElement getBtnCheckPrice(String departStation, String arriveStation) {
-        return Constant.webdriver.get().findElement(By.xpath("//td/li[text()='"+ departStation + " to " + arriveStation +"']/ancestor::tr//a"));
+        return Driver.getDriver().findElement(By.xpath("//td/li[text()='"+ departStation + " to " + arriveStation +"']/ancestor::tr//a"));
     }
 
     // Methods

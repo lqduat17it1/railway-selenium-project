@@ -1,11 +1,12 @@
 package pageObjects;
 
-import common.Constant;
+import common.Driver;
+import dataObjects.DataTestSet1;
 
 public class HomePage extends BasePage {
 
     public HomePage open() {
-        Constant.webdriver.get().navigate().to(Constant.RAILWAY_URL);
+        Driver.getDriver().navigate().to(DataTestSet1.RAILWAY_URL);
         return this;
     }
 }

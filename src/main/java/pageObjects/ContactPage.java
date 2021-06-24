@@ -1,6 +1,6 @@
 package pageObjects;
 
-import common.Constant;
+import common.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -11,7 +11,7 @@ public class ContactPage {
 
     // Elements
     public WebElement getLblEmail() {
-        return Constant.webdriver.get().findElement(lblEmail);
+        return Driver.getDriver().findElement(lblEmail);
     }
 
     // Methods

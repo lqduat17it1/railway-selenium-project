@@ -1,6 +1,6 @@
 package pageObjects;
 
-import common.Constant;
+import common.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -12,11 +12,11 @@ public class TicketPricePage {
 
     // Elements
     public WebElement getTxtStation() {
-        return Constant.webdriver.get().findElement(txtStation);
+        return Driver.getDriver().findElement(txtStation);
     }
 
     public WebElement getBtnBookTicket(String seatType) {
-        return Constant.webdriver.get().findElement(By.xpath("//td[text()='"+ seatType +"']/..//a"));
+        return Driver.getDriver().findElement(By.xpath("//td[text()='"+ seatType +"']/..//a"));
     }
 
     // Methods

@@ -1,9 +1,8 @@
 package pageObjects;
 
-import common.Constant;
+import common.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 
 public class SuccessPage {
 
@@ -16,23 +15,23 @@ public class SuccessPage {
 
     // Elements
     public WebElement getLblDepartStation() {
-        return Constant.webdriver.get().findElement(lblDepartStation);
+        return Driver.getDriver().findElement(lblDepartStation);
     }
 
     public WebElement getLblArriveStation() {
-        return Constant.webdriver.get().findElement(lblArriveStation);
+        return Driver.getDriver().findElement(lblArriveStation);
     }
 
     public WebElement getLblSeatType() {
-        return Constant.webdriver.get().findElement(lblSeatType);
+        return Driver.getDriver().findElement(lblSeatType);
     }
 
     public WebElement getLblDepartDate() {
-        return Constant.webdriver.get().findElement(lblDepartDate);
+        return Driver.getDriver().findElement(lblDepartDate);
     }
 
     public WebElement getLblAmount() {
-        return Constant.webdriver.get().findElement(lblAmount);
+        return Driver.getDriver().findElement(lblAmount);
     }
 
     // Methods

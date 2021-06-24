@@ -1,12 +1,8 @@
 package pageObjects;
 
-import common.Constant;
+import common.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class AccountConfirmPage {
 
@@ -17,15 +13,15 @@ public class AccountConfirmPage {
 
     // Elements
     public WebElement getLblMessage() {
-        return Constant.webdriver.get().findElement(lblMessage);
+        return Driver.getDriver().findElement(lblMessage);
     }
 
     public WebElement getTxtConfirmationCode() {
-        return Constant.webdriver.get().findElement(txtConfirmationCode);
+        return Driver.getDriver().findElement(txtConfirmationCode);
     }
 
     public WebElement getBtnConfirm() {
-        return Constant.webdriver.get().findElement(btnConfirm);
+        return Driver.getDriver().findElement(btnConfirm);
     }
 
     // Methods

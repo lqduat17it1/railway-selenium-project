@@ -1,16 +1,14 @@
 package pageObjects;
 
-import common.Constant;
+import common.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 public class MyTicketPage {
 
@@ -23,31 +21,31 @@ public class MyTicketPage {
 
     // Elements
     public Select getSelectDepartStation() {
-        return new Select(Constant.webdriver.get().findElement(selectDepartStation));
+        return new Select(Driver.getDriver().findElement(selectDepartStation));
     }
 
     public Select getSelectArriveStation() {
-        return new Select(Constant.webdriver.get().findElement(selectArriveStation));
+        return new Select(Driver.getDriver().findElement(selectArriveStation));
     }
 
     public WebElement getTxtDepartDate() {
-        return Constant.webdriver.get().findElement(txtDepartDate);
+        return Driver.getDriver().findElement(txtDepartDate);
     }
 
     public Select getSelectStatus() {
-        return new Select(Constant.webdriver.get().findElement(selectStatus));
+        return new Select(Driver.getDriver().findElement(selectStatus));
     }
 
     public WebElement getBtnApplyFilter() {
-        return Constant.webdriver.get().findElement(btnApplyFilter);
+        return Driver.getDriver().findElement(btnApplyFilter);
     }
 
     public WebElement getBtnOperation(String departStation, String arriveStation) {
-        return Constant.webdriver.get().findElement(By.xpath("//td[text()='"+ departStation +"']/following-sibling::td[text()='"+ arriveStation +"']/../td[count(//th[text()='Operation']/preceding-sibling::th)+1]"));
+        return Driver.getDriver().findElement(By.xpath("//td[text()='"+ departStation +"']/following-sibling::td[text()='"+ arriveStation +"']/../td[count(//th[text()='Operation']/preceding-sibling::th)+1]"));
     }
 
     public WebElement getTicket(String departStation, String arriveStation, String departDate, String seatType, String amount) {
-        return Constant.webdriver.get().findElement(By.xpath("//td[text()='"+ departStation +"']/../td[text()='"+ arriveStation +"']/../td[text()='"+ seatType +"']/../td[text()='"+ departDate +"']/../td[text()='"+ amount +"']"));
+        return Driver.getDriver().findElement(By.xpath("//td[text()='"+ departStation +"']/../td[text()='"+ arriveStation +"']/../td[text()='"+ seatType +"']/../td[text()='"+ departDate +"']/../td[text()='"+ amount +"']"));
     }
 
     // Methods
@@ -75,9 +73,9 @@ public class MyTicketPage {
 
     public void deleteTicket(String departStation, String arriveStation) {
         getBtnOperation(departStation, arriveStation).click();
-        WebDriverWait wait = new WebDriverWait(Constant.webdriver.get(), Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
         wait.until(ExpectedConditions.alertIsPresent());
-        Constant.webdriver.get().switchTo().alert().accept();
+        Driver.getDriver().switchTo().alert().accept();
     }
 
 }

@@ -1,6 +1,5 @@
 package common;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -13,64 +12,61 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class Constant {
-
-    public static WebDriverWait wait;
-    public static final String RAILWAY_URL = "http://railway2.somee.com/";
+public class Driver {
 
     public static ThreadLocal<WebDriver> webdriver = new ThreadLocal<>();
+    public static WebDriverWait wait;
 
-    private WebDriver WEBDRIVER;
-
-    public void setDriver(String browser, String mode) throws Exception {
-        switch (browser) {
-            case "Chrome": {
+    public static void setDriver(String browser, String mode) throws Exception {
+        switch (browser.toUpperCase()) {
+            case "CHROME": {
                 System.setProperty("webdriver.chrome.driver", "Executables/chromedriver.exe");
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("headless");
                 if (mode.equals("headless"))
-                    WEBDRIVER = new ChromeDriver(options);
+                    webdriver.set(new ChromeDriver(options));
                 else
-                    WEBDRIVER = new ChromeDriver();
+                    webdriver.set(new ChromeDriver());
                 break;
             }
-            case "Firefox": {
+            case "FIREFOX": {
                 System.setProperty("webdriver.gecko.driver", "Executables/geckodriver.exe");
                 FirefoxOptions options = new FirefoxOptions();
                 options.setHeadless(true);
                 if (mode.equals("headless"))
-                    WEBDRIVER = new FirefoxDriver(options);
+                    webdriver.set(new FirefoxDriver(options));
                 else
-                    WEBDRIVER = new FirefoxDriver();
+                    webdriver.set(new FirefoxDriver());
                 break;
             }
-            case "Edge": {
+            case "EDGE": {
                 System.setProperty("webdriver.edge.driver", "Executables/msedgedriver.exe");
                 EdgeOptions options = new EdgeOptions();
                 options.addArguments("headless");
                 if (mode.equals("headless"))
-                    WEBDRIVER = new EdgeDriver(options);
+                    webdriver.set(new EdgeDriver(options));
                 else
-                    WEBDRIVER = new EdgeDriver();
+                    webdriver.set(new EdgeDriver());
                 break;
             }
             case "IE":
                 System.setProperty("webdriver.ie.driver", "Executables/IEDriverServer.exe");
-                WEBDRIVER = new InternetExplorerDriver();
+                webdriver.set(new InternetExplorerDriver());
                 break;
             default:
                 throw new Exception("Browser is not available");
         }
-        wait = new WebDriverWait(WEBDRIVER, Duration.ofSeconds(10));
+        wait = new WebDriverWait(webdriver.get(), Duration.ofSeconds(10));
     }
 
-    public WebDriver getDriver() {
-        return WEBDRIVER;
+    public static WebDriver getDriver() {
+        return webdriver.get();
     }
 
-    public static void scrollDown() {
-        JavascriptExecutor js = (JavascriptExecutor) webdriver.get() ;
-        js.executeScript("window.scrollBy(0,2000)");
+    public static void closeDriver() {
+        webdriver.get().close();
+        webdriver.remove();
     }
+
 
 }
